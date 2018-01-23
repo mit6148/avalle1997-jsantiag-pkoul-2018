@@ -7,11 +7,15 @@ const app = express();
 app.use('/static', express.static('public'));
 
 app.get('/', function(req, res) {
-  res.sendFile('index.html', { root: 'src/views' });
+  res.sendFile('login.html', { root: 'public/login' });
+});
+
+app.get('/u/game', function(req, res) {
+  res.sendFile('game.html', { root: 'public/game' });
 });
 
 app.get('/u/forum', function(req, res) {
-  res.sendFile('forum.html', { root: 'src/views' });
+  res.sendFile('forum.html', { root: 'public/forum' });
 });
 
 const port = 3000;
