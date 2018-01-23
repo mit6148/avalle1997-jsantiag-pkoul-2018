@@ -1,0 +1,25 @@
+{
+  "name": "avalle1997-jsantiag-pkoul-2018",
+  "version": "1.0.0",
+  "description": "A text-based game about Wellesley College",
+  "main": "login.js",
+  "scripts": {
+    "test": "btr"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mit6148/avalle1997-jsantiag-pkoul-2018.git"
+  },
+  "keywords": [
+    "game"
+  ],
+  "author": "A, J and P",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mit6148/avalle1997-jsantiag-pkoul-2018/issues"
+  },
+  "homepage": "https://github.com/mit6148/avalle1997-jsantiag-pkoul-2018#readme",
+  "dependencies": {
+    "http": "0.0.0"
+  }
+}
