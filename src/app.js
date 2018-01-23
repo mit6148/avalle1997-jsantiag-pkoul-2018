@@ -7,7 +7,7 @@ const app = express();
 app.use('/static', express.static('public'));
 
 app.get('/', function(req, res) {
-  res.sendFile('login.html', { root: 'public/login' });
+  res.sendFile('index.html', { root: 'public' });
 });
 
 app.get('/u/game', function(req, res) {
