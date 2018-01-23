@@ -4,17 +4,22 @@
 <head>
   <meta charset="UTF-8">
   <title>game page fingers crossed</title>
-
-
-
+  
+  
+  
       <link rel="stylesheet" href="css/style.css">
 
-
+  
 </head>
 
 <body>
 
+  <head>
+    <Script>
 
+    </Script>
+      
+</head>      
 <body>
 <div class= "container">
   <header><h1><img src="http://i67.tinypic.com/2nlbyaw.jpg"
@@ -27,20 +32,88 @@
   </nav>
   </div>
  <div id="terminal">
+    <input type="text" class="user-input" id="one" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5">
+    <input type="text" class="user-input" id="two" onkeypress="peakInput()" onkeydown="changeTarget()"  maxlength="5" disabled>
+    <input type="text" class="user-input" id= "three" onkeypress= "peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+    <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+   <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+   <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+   <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+   <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+   <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+   <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+      <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+   <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+   <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+   <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+   <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+      <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+                                                                                                                      
+   <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+   <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+   <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+      <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+   <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+   <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+   <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+   <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+   <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+   <input type="text" class="user-input" id="special" onkeypress="peakInput()" onkeydown="testJS()" maxlength="5" disabled>
+  </div>
+   
+<!--   Cite: https://stackoverflow.com/questions/25827148/how-do-i-get-the-actual-event-keydown-target-of-an-element-inside-a-polymer-comp -->
+   <script>
+     var container = document.getElementsByClassName("terminal")[0];
+     terminal.onkeypress = function(e) {
+      var target = e.srcElement || e.target;                                            console.log("1");      
+      var maxLength = parseInt(target.attributes["maxlength"].value, 10);
+      var myLength = target.value.length;
+      if (myLength >= maxLength) {
+          console.log("q");
+          var next = target;
+          while (next = next.nextElementSibling) {
+            //
+              if (next == null){
+                  console.log("--");
+                  break;
+              }
+              if (next.tagName.toLowerCase() === "input") {
+                  console.log("b");
+                  target.disabled = true;
+                  next.disabled = false;
+                  next.select();
+                  break;     
+              }
+          }
+        
+      } 
+       else{
+         console.log("c");
+         document.getElementById("one").focus();
+       }
+    document.getElementById('terminal').reset();
+       target.blur();
+      var temp  = document.getElementById("special");
+       temp.disable = false;
+       temp.focus();
+       temp.select();
+}
+   </script>
+  
+  </div> 
 
- </div>
  <div class = "triplets">
    <div id = "bbygirl">1</div>
    <div id = "bbybby">2</div>
    <div id = "infant">3</div>
   </div>
-
+  
 </body>
  <script src="scripts/index.js">
 </script>
 </body>
-
-
+  
+  
 
     <script  src="js/index.js"></script>
 
