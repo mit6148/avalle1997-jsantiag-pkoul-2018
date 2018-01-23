@@ -10,8 +10,8 @@ app.get('/', function(req, res) {
   res.sendFile('index.html', { root: 'src/views' });
 });
 
-app.get('/u/profile', function(req, res) {
-  res.sendFile('profile.html', { root: 'src/views' });
+app.get('/u/forum', function(req, res) {
+  res.sendFile('forum.html', { root: 'src/views' });
 });
 
 const port = 3000;
