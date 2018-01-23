@@ -4,6 +4,7 @@
   "description": "A text-based game about Wellesley College",
   "main": "login.js",
   "scripts": {
+    "start": "node app.js",
     "test": "btr"
   },
   "repository": {
@@ -20,6 +21,8 @@
   },
   "homepage": "https://github.com/mit6148/avalle1997-jsantiag-pkoul-2018#readme",
   "dependencies": {
-    "http": "0.0.0"
+    "express": "^4.16.2",
+    "http": "0.0.0",
+    "nodemon": "^1.14.11"
   }
 }
