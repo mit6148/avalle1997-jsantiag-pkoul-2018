@@ -1,13 +1,12 @@
 const http = require('http');
 const express = require('express');
-
-
 const app = express();
+
 
 app.use('/static', express.static('public'));
 
 app.get('/', function(req, res) {
-  res.sendFile('index.html', { root: 'public' });
+  res.sendFile('login.html', { root: 'public/login' });
 });
 
 app.get('/u/game', function(req, res) {
