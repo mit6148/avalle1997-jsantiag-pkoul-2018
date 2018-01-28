@@ -5,6 +5,12 @@ body {
   font-weight: 300;
 }
 
+.description {
+  text-align: center;
+  vertical-align: middle;
+  line-height: 90px;
+}
+
 .story {
 	margin: 10px 0px;
 }
@@ -25,6 +31,3 @@ body {
 .feed-container {
 	padding: 1rem 0;
 }
-
-
-
