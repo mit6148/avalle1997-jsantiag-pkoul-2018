@@ -1,0 +1,56 @@
+body{
+  background-color: black;
+  font-family: 'VT323', monospace;
+}
+#user-input {
+    border: none;
+    color: transparent;
+    display: inline-block;
+    padding-left: 150px;
+    font-size: 1.2em;
+    text-shadow: 8px 4px 0 purple;
+    padding-right:none;
+    margin-right:none;
+    background: transparent;
+}
+
+ #user-input:focus {
+   outline: none;
+   cursor:none;
+}
+
+#user-input {
+  font-size: 20px;
+  display: inline-block;
+}
+
+#user-input:after {
+  content: '';
+  width: 20px;
+  height: 5px;
+  background: green;
+  opacity: 0;
+  display: inline-block;
+  animation: blink 1s linear infinite alternate;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#terminal{
+  color: black;
+  background-color: black;
+}
+.prompt {
+  color: #55ff55;
+  font-weight: bold;
+  font-size: 14px;
+  text-align:center;
+
+}
