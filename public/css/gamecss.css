@@ -57,42 +57,41 @@ li a:hover {
   margin-top:10px;
   margin-left:0px;
   border:1pt solid pink;
-  height:75vh;
+  height:78vh;
   width:70%;
   display: inline-block;
   vertical-align: bottom;
   color: black;
 }
 .triplets{
-  margin-top: 20px;
+  margin-top: 10px;
   margin-right:5px;
   display: inline-block;
   float:right;
-  width: 28%;
+  width: 29%;
   position: absolute;
   right:5px;
-
-
 }
+
 #bbygirl{
   border:1pt solid pink;
   margin-left:5px;
   margin-right:5px;
   margin-bottom:5px;
-  height:31vh;
-  width:95%;
+  height:26vh;
+  width:98%;
 }
 #bbybby{
   border:1pt solid orange;
   margin:5px;
-  width:95%;
+  width:98%;
   height:40vh;
 }
 #infant{
   border:1pt solid blue;
   margin:5px;
-  width:95%;
-  height:10vh;
+  width:98%;
+  height:9vh;
 
 body{
   background-color: #1a001a;
