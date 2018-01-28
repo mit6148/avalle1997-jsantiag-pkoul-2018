@@ -54,11 +54,11 @@ li a:hover {
     border: 1px solid green;
 }
 #terminal{
-  margin-top:20px;
-  margin-left:10px;
+  margin-top:10px;
+  margin-left:0px;
   border:1pt solid pink;
-  height:83vh;
-  width:68%;
+  height:75vh;
+  width:70%;
   display: inline-block;
   vertical-align: bottom;
   color: black;
