@@ -1,25 +1,103 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Forum</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/css/style.css">
-    <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+<head>
+  <title>Forum</title>
 
-  </head>
-  <body>
-  <!--  <nav class="navbar navbar-expand-lg navbar-dark bg-primary"> -->
-  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000000;">
-    <div class="navbar-brand" href="#">Back to the Routes</div>
-      <div class="navbar-nav" id="nav-item-container">
-        <!-- navbar items are inserted here -->
-      </div>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/gamecss.css">
+  <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <div class= "container">
+    <header><h1>Back to the Routes
+    </h1></header>
+    <nav>
+      <ul>
+        <li><a href="/u/forum">Forum</a></li>
+        <li><a href="/u/logout">Log Out</a></li>
+      </ul>
     </nav>
-  </body>
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="/static/js/api.js"></script>
-  <script src="/static/js/navbar.js"></script>
-  <script src="/static/js/feed.js"></script>
-  <script src="/static/js/index.js"></script>
+  </div>
+  <div id="terminal">
+    <div id="temp">
+      <input type="text" class="user-input" id="one" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5">
+      <input type="text" class="user-input" id="two" onkeypress="peakInput()" onkeydown="changeTarget()"  maxlength="5" disabled>
+      <input type="text" class="user-input" id= "three" onkeypress= "peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+      <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+      <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+      <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+      <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+      <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+      <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+      <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+      <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+      <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+      <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+      <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+      <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+      <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+      <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+      <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+      <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+      <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+      <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+      <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+      <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+      <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+      <input type="text" class="user-input" id="four" onkeypress="peakInput()" onkeydown="changeTarget()" maxlength="5" disabled>
+      <input type="text" class="user-input" id="special" onkeypress="peakInput()" onkeydown="testJS()" maxlength="5" disabled>
+    </div>
+  </div>
+
+  <!--   Cite: https://stackoverflow.com/questions/25827148/how-do-i-get-the-actual-event-keydown-target-of-an-element-inside-a-polymer-comp -->
+  <script>
+  var container = document.getElementsByClassName("terminal")[0];
+  terminal.onkeypress = function(e) {
+    console.log("1");
+    var target = e.srcElement || e.target;                                            console.log("1");
+    var maxLength = parseInt(target.attributes["maxlength"].value, 10);
+    var myLength = target.value.length;
+    if (myLength >= maxLength) {
+      console.log("2a");
+      var next = target;
+      while (next = next.nextElementSibling) {
+        //
+        if (next == null){
+          console.log("3a");
+          break;
+        }
+        if (next.tagName.toLowerCase() === "input") {
+          console.log("3b");
+          target.disabled = true;
+          next.disabled = false;
+          next.select();
+          break;
+        }
+        console.log("3");
+      }
+
+    }
+    else{
+      console.log("2b");
+      document.getElementById("one").focus();
+    }
+    document.getElementById('terminal').reset();
+    target.blur();
+    var temp  = document.getElementById("special");
+    temp.disable = false;
+    temp.focus();
+    temp.select();
+  }
+  </script>
+
+</div>
+
+<div class = "triplets">
+  <div id = "bbygirl">1</div>
+  <div id = "bbybby">2</div>
+  <div id = "infant">3</div>
+</div>
+</body>
+
 </html>

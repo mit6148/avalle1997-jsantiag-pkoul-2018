@@ -1,0 +1,152 @@
+
+@import url('https://fonts.googleapis.com/css?family=VT323');
+
+header {
+width: 100%;
+margin-left:px;
+padding:0px;
+background:#4E4C4D;
+}
+
+h1 {
+float: left;
+width:70%;
+height:105px;
+margin:0px;
+background:#333;
+border: 1px solid #00ff00;
+text-align: center;
+font-family: 'VT323', monospace;
+font-weight: 300;
+font-size: 60px;
+color: #00ff00;
+padding-top: 4px
+}
+
+nav {
+float: right;
+width:29%;
+height:113px;
+border: 1px solid #00ff00;
+}
+ul {
+    list-style-type: none;
+    margin: 1px;
+    padding: 0;
+    overflow: hidden;
+    background-color: #111;
+
+}
+
+li a {
+    display: block;
+    font-family: 'VT323', monospace;
+    font-size: 20px;
+    color: #00ff00;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+    background-color: #333;
+    border: 1px solid green;
+}
+#terminal{
+  margin-top:20px;
+  margin-left:10px;
+  border:1pt solid pink;
+  height:630px;
+  width:68%;
+  display: inline-block;
+  vertical-align: bottom;
+  color: black;
+}
+.triplets{
+  margin-top: 20px;
+  margin-right:5px;
+  display: inline-block;
+  float:right;
+  width: 28%;
+  position: absolute;
+  right:5px;
+
+
+}
+#bbygirl{
+  border:1pt solid pink;
+  margin-left:5px;
+  margin-right:5px;
+  margin-bottom:5px;
+  height:200px;
+  width:95%;
+}
+#bbybby{
+  border:1pt solid orange;
+  margin:5px;
+  width:95%;
+  height:344px;
+}
+#infant{
+  border:1pt solid blue;
+  margin:5px;
+  width:95%;
+  height:70px;
+}
+body{
+  background-color: #1a001a;
+}
+img {
+    display: block;
+    margin-left: auto;
+    margin-top:15px;
+    margin-right: auto;
+    border: 1px solid black;
+}
+.prompt {
+  color: #55ff55;
+  font-weight: bold;
+  font-size: 14px;
+
+}
+
+input {
+  margin: 10px;
+  padding: 10px;
+  width: 90%
+}
+
+.user-input {
+  color: #55ff55;
+  height: 20px;
+  margin: none;
+  padding: none;
+  margin-top: 1px;
+  border: none;
+  margin-bottom:1px;
+  font-weight: bold;
+  font-family: "courier";
+   border: black;
+  background-color: transparent;
+}
+
+textarea:focus, input:focus{
+    outline-color: green;
+}
+
+.response {
+  color: #a146ff;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.hidden {
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+ol {
+  background: white !important;
+}
