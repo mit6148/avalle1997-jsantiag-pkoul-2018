@@ -11,7 +11,7 @@ background:#4E4C4D;
 h1 {
 float: left;
 width:70%;
-height:105px;
+height:106px;
 margin:0px;
 background:#333;
 border: 1px solid #00ff00;
@@ -55,7 +55,7 @@ li a:hover {
   margin-top:20px;
   margin-left:10px;
   border:1pt solid pink;
-  height:800px;
+  height:83vh;
   width:68%;
   display: inline-block;
   vertical-align: bottom;
@@ -77,21 +77,21 @@ li a:hover {
   margin-left:5px;
   margin-right:5px;
   margin-bottom:5px;
-  height:315px;
+  height:31vh;
   width:95%;
 }
 #bbybby{
   border:1pt solid orange;
   margin:5px;
   width:95%;
-  height:405px;
+  height:40vh;
 }
 #infant{
   border:1pt solid blue;
   margin:5px;
   width:95%;
-  height:70px;
-}
+  height:10vh;
+
 body{
   background-color: #1a001a;
 }
