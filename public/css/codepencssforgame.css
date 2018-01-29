@@ -1,0 +1,55 @@
+body{
+  font-family: 'Dhurjati', sans-serif;
+/*   font-weight: "normal"; */
+  letter-spacing:1px;
+  word-wrap = "break-word";
+}
+
+#terminal{
+  background-color: black;
+  height: 400px;
+  width: 550px;
+  padding: 10px;
+}
+
+#user-input{
+    width: 100px;
+    font-size: 20px;
+    text-align:right;
+    text-shadow: 2px 2px 0px #CFD8DC;
+    font-family: 'Dhurjati', sans-serif;
+    }
+
+#user-input:focus {
+   outline: none;
+   color: transparent;
+   bachground:transparent;
+ }
+
+#input-cursor {
+    display: inline-block;
+    background: transparent;
+    position: relative;
+    display:none; /*toggle beween */
+    top: 3px;
+}
+
+#input-cursor:after {
+  content: '';
+  width: 20px;
+  height: 5px;
+  background: green;
+  opacity: 0;
+  padding-left:none;
+  display: inline-block;
+  animation: blink .5s linear infinite alternate;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

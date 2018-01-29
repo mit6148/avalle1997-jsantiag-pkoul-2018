@@ -2,8 +2,8 @@ function main() {
   get('/api/whoami', {}, function(user) {
     renderNavbar(user);
 
-    const descriptionDiv = document.getElementById('description');
-    descriptionDiv.innerHTML = "This is a text based role playing game about navigating Wellesley College.";
+    // const descriptionDiv = document.getElementById('description');
+    // descriptionDiv.innerHTML = "This is a text based role playing game about navigating Wellesley College.";
 
 
     // renderStories(user);

@@ -1,6 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css?family=VT323');
 
+/* Everything other than the terminal */
 header {
 width: 100%;
 margin-left:px;
@@ -8,7 +9,7 @@ padding:0px;
 background:#4E4C4D;
 }
 
-/* This is the div in which the actual t*/
+/* This is the div in which the actual title is*/
 h1 {
 float: left;
 width:70%;
@@ -53,16 +54,7 @@ li a:hover {
     background-color: #333;
     border: 1px solid green;
 }
-#terminal{
-  margin-top:10px;
-  margin-left:0px;
-  border:1pt solid pink;
-  height:78vh;
-  width:70%;
-  display: inline-block;
-  vertical-align: bottom;
-  color: black;
-}
+
 .triplets{
   margin-top: 10px;
   margin-right:5px;
@@ -150,4 +142,59 @@ textarea:focus, input:focus{
 
 ol {
   background: white !important;
+}
+
+/* Terminal elements start here */
+
+#terminal{
+  margin-top:10px;
+  margin-left:0px;
+  border:1pt solid pink;
+  height:78vh;
+  width:70%;
+  display: inline-block;
+  vertical-align: bottom;
+  color: black;
+}
+
+#user-input{
+    width: 100px;
+    font-size: 20px;
+    text-align:right;
+    text-shadow: 2px 2px 0px #CFD8DC;
+    font-family: 'Dhurjati', sans-serif;
+    }
+
+#user-input:focus {
+   outline: none;
+   color: transparent;
+   bachground:transparent;
+ }
+
+#input-cursor {
+    display: inline-block;
+    background: transparent;
+    position: relative;
+    display:none; /*toggle beween */
+    top: 3px;
+}
+
+#input-cursor:after {
+  content: '';
+  width: 20px;
+  height: 5px;
+  background: green;
+  opacity: 0;
+  padding-left:none;
+  display: inline-block;
+  animation: blink .5s linear infinite alternate;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
