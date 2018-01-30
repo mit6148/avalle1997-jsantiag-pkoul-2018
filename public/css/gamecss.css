@@ -3,13 +3,12 @@
 
 body{
   background: linear-gradient(black, #862d59);
+  height:98vh;
 }
 
 
 header {
 width: 100%;
-margin-left:px;
-padding:0px;
 background:#4E4C4D;
 padding-left: 8px
 }
@@ -18,14 +17,14 @@ h1 {
 float: left;
 width:68%;
 height:90px;
-margin:0px;
 background:#13060d;
 border: 3px solid #00ff00;
 text-align: center;
 font-family: 'VT323', monospace;
 font-size: 60pt;
 color: #00ff00;
-padding-top: 4px;
+margin-top: 0px;
+margin-bottom:10px;
 }
 
 nav {
@@ -37,7 +36,6 @@ height:91px;
 ul {
     list-style-type: none;
     margin: 1px;
-    padding: 0;
     overflow: hidden;
     background-color: #111;
 
@@ -51,6 +49,7 @@ li a {
     text-align: center;
     padding: 10px 10px;
     text-decoration: none;
+    margin-right:55px;
 }
 
 li a:hover {
@@ -61,7 +60,7 @@ li a:hover {
   margin-top:10px;
   margin-left:10px;
   border:1pt solid pink;
-  height:79vh;
+  height:83vh;
   width:68%;
   display: inline-block;
   vertical-align: bottom;
@@ -83,8 +82,8 @@ li a:hover {
   border:1pt solid pink;
   margin-left:5px;
   margin-right:5px;
-  margin-bottom:5px;
-  height:30vh;
+  margin-bottom:11px;
+  height:32vh;
   width:95%;
   background-color:#260d1a;
 
@@ -92,8 +91,9 @@ li a:hover {
 #bbybby{
   border:1pt solid pink;
   margin:5px;
+  margin-bottom:11px;
   width:95%;
-  height:38vh;
+  height:40vh;
   background-color: black;
 }
 #infant{
