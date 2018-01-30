@@ -15,7 +15,7 @@ function renderNavbar(user) {
   // NOTE: this check is a lowkey hack
   if (user._id) {
     navbarDiv.appendChild(newNavbarItem('Game', '/u/game'));
-    navbarDiv.appendChild(newNavbarItem('Profile', '/u/profile?'+user._id));
+    //navbarDiv.appendChild(newNavbarItem('Profile', '/u/profile?'+user._id));
     navbarDiv.appendChild(newNavbarItem('Forum', '/u/forum'));
     navbarDiv.appendChild(newNavbarItem('Logout', '/logout'));
   } else {

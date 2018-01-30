@@ -5,6 +5,18 @@ body {
   font-weight: 300;
 }
 
+#terminal {
+  padding-top: 5%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+#optionsBox{
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+
 .nav-link {
   font-size: 150%;
 }
