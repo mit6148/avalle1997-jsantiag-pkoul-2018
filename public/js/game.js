@@ -664,7 +664,7 @@ function styleElement(el) {
 
     if (el.id === "terminal-ctrls") {
       /*ADD */
-      el.innerHTML = "CTRL+Q   |  CTRL+?";
+      el.innerHTML = "CTRL+Q";
       el.style.background = "#757575";
       el.style.height = "3%";
       el.style.fontSize = "100%";
