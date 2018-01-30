@@ -1,15 +1,11 @@
 
 @import url('https://fonts.googleapis.com/css?family=VT323');
 
-<<<<<<< HEAD
 body{
   background: linear-gradient(black, #862d59);
 }
 
 
-=======
-/* Everything other than the terminal */
->>>>>>> bb1d0ed39522811f88ae2fa93cc27b0c02a6cd2d
 header {
 width: 100%;
 margin-left:px;
@@ -17,36 +13,24 @@ padding:0px;
 background:#4E4C4D;
 }
 
-/* This is the div in which the actual title is*/
 h1 {
 float: left;
 width:70%;
-height:90px;
+height:106px;
 margin:0px;
 background:#13060d;
 border: 3px solid #00ff00;
 text-align: center;
 font-family: 'VT323', monospace;
-font-size: 60pt;
+font-size: 65pt;
 color: #00ff00;
-<<<<<<< HEAD
 padding-top: 4px
 
-=======
-padding-top: 3px
->>>>>>> bb1d0ed39522811f88ae2fa93cc27b0c02a6cd2d
 }
-
 nav {
 float: right;
 width:29%;
-<<<<<<< HEAD
 height:113px;
-/*border: 3px solid #00ff00;*/
-=======
-height:93px;
-border: 1px solid #00ff00;
->>>>>>> bb1d0ed39522811f88ae2fa93cc27b0c02a6cd2d
 }
 
 ul {
@@ -55,24 +39,23 @@ ul {
     padding: 0;
     overflow: hidden;
     background-color: #111;
+
 }
 
 li a {
     display: block;
     font-family: 'VT323', monospace;
-    font-size: 18pt;
+    font-size: 20pt;
     color: #00ff00;
     text-align: center;
-    padding: 9px 9px;
+    padding: 14px 16px;
     text-decoration: none;
 }
 
-/* Change the link color to #111 (black) on hover */
 li a:hover {
     background-color: #13060d;
     border: 1px solid green;
 }
-<<<<<<< HEAD
 #terminal{
   margin-top:20px;
   margin-left:10px;
@@ -84,55 +67,44 @@ li a:hover {
   color: black;
 
 }
-=======
-
->>>>>>> bb1d0ed39522811f88ae2fa93cc27b0c02a6cd2d
 .triplets{
-  margin-top: 10px;
+  margin-top: 20px;
   margin-right:5px;
   display: inline-block;
   float:right;
-  width: 29%;
+  width: 28%;
   position: absolute;
   right:5px;
-}
 
+
+}
 #bbygirl{
   border:1pt solid pink;
   margin-left:5px;
   margin-right:5px;
   margin-bottom:5px;
-<<<<<<< HEAD
   height:31vh;
   width:95%;
   background-color: black;
 
-=======
-  height:26vh;
-  width:98%;
->>>>>>> bb1d0ed39522811f88ae2fa93cc27b0c02a6cd2d
 }
 #bbybby{
   border:1pt solid pink;
   margin:5px;
-  width:98%;
+  width:95%;
   height:40vh;
   background-color: black;
 }
 #infant{
   border:1pt solid pink;
   margin:5px;
-<<<<<<< HEAD
   width:95%;
   height:10vh;
   background-color: black;
-=======
-  width:98%;
-  height:9vh;
->>>>>>> bb1d0ed39522811f88ae2fa93cc27b0c02a6cd2d
 
 }
 
+/* Terminal elements start here */
 img {
     display: block;
     margin-left: auto;
@@ -153,19 +125,6 @@ input {
   width: 90%
 }
 
-.user-input {
-  color: #55ff55;
-  height: 20px;
-  margin: none;
-  padding: none;
-  margin-top: 1px;
-  border: none;
-  margin-bottom:1px;
-  font-weight: bold;
-  font-family: "courier";
-   border: black;
-  background-color: transparent;
-}
 
 textarea:focus, input:focus{
     outline-color: green;
@@ -187,18 +146,7 @@ ol {
   background: white !important;
 }
 
-/* Terminal elements start here */
 
-#terminal{
-  margin-top:10px;
-  margin-left:0px;
-  border:1pt solid pink;
-  height:78vh;
-  width:70%;
-  display: inline-block;
-  vertical-align: bottom;
-  color: black;
-}
 
 #user-input{
     width: 100px;
