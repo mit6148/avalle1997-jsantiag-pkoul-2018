@@ -11,7 +11,7 @@
   <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
 </head>
 <body>
-  <div class= "container">
+  <div class= "container" id = "head-container">
     <header><h1>Back to the Routes
     </h1></header>
     <nav>
@@ -25,49 +25,6 @@
      <label id="input-cursor"> </label>
 
   </div>
-
-  <!--   Cite: https://stackoverflow.com/questions/25827148/how-do-i-get-the-actual-event-keydown-target-of-an-element-inside-a-polymer-comp -->
-<!--  <script>
-  var container = document.getElementsByClassName("terminal")[0];
-  terminal.onkeypress = function(e) {
-    console.log("1");
-    var target = e.srcElement || e.target;                                            console.log("1");
-    var maxLength = parseInt(target.attributes["maxlength"].value, 10);
-    var myLength = target.value.length;
-    if (myLength >= maxLength) {
-      console.log("2a");
-      var next = target;
-      while (next = next.nextElementSibling) {
-        //
-        if (next == null){
-          console.log("3a");
-          break;
-        }
-        if (next.tagName.toLowerCase() === "input") {
-          console.log("3b");
-          target.disabled = true;
-          next.disabled = false;
-          next.select();
-          break;
-        }
-        console.log("3");
-      }
-
-    }
-    else{
-      console.log("2b");
-      document.getElementById("one").focus();
-    }
-    document.getElementById('terminal').reset();
-    target.blur();
-    var temp  = document.getElementById("special");
-    temp.disable = false;
-    temp.focus();
-    temp.select();
-  }
-</script> -->
-
-</div>
 
 <div class = "triplets">
   <div id = "bbygirl">
