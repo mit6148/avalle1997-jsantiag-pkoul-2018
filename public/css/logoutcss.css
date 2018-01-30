@@ -1,0 +1,33 @@
+/***************************************************************************************
+*    Title: tv screen off animation
+*    Author: vivek marakana
+*    Date: 1/28/2018
+*    Code version: 1
+*    Availability:https://codepen.io/vivekmarakana/pen/hqAou
+***************************************************************************************/
+
+div#topDiv{
+    width:100%;
+    height:0%;
+    opacity:0.9;
+    background:black;
+    position:absolute;
+    top: 0%;
+}
+div#bottomDiv{
+    width:100%;
+    height:0%;
+    opacity:0.9;
+    background:black;
+    position:absolute;
+    bottom: 0%;
+}
+div#centerDiv{
+    position:absolute;
+    height: 1px;
+    top: 50%;
+    width:100%;
+    background: white;
+    display:none;
+    z-index:1;
+}

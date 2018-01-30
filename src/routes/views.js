@@ -7,10 +7,12 @@ const router = express.Router();
 router.get('/', function(req, res, next) {
   res.sendFile('index.html', { root: 'src/views' });
 });
-
+router.get('/u/end', function(req,res,next){
+	res.sendFile('logout.html', {root:'src/views'});
+});
 router.get('/logout', function(req, res) {
   req.logout();
-  res.redirect('/');
+  res.redirect('/u/end'); 
 });
 
 router.get('/u/profile', function(req, res) {
