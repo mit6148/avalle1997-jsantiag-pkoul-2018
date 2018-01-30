@@ -1,3 +1,7 @@
+// FROM CATBOOK WORKSHOP ADVANCED
+// https://github.com/mit6148/catbook-advanced
+
+
 function main() {
   const profileId = window.location.search.substring(1);
   get('/api/user', {'_id': profileId}, function(profileUser) {

@@ -595,7 +595,7 @@ function styleElement(el) {
       el.style.display = "block";
       el.style.padding =  "1% 0% 0% 0%";
       el.style.textAlign = "center";
-      el.style.fontSize = "375%";
+      el.style.fontSize = "300%";
       el.style.lineHeight = "1";
       el.style.textTransform = "capitalize";
       console.log("Element styled is in terminal-->game-->" + el.id);
@@ -656,8 +656,8 @@ function styleElement(el) {
       el.style.background = "transparent";
       el.style.borderStyle = "dashed double dashed double";
       el.style.position = "fixed";
-      el.style.left = "85%";
-      el.style.bottom = "92%";
+      el.style.left = "85.5%";
+      el.style.bottom = "91%";
       console.log("Element styled is in terminal-->game-->" + el.id);
     }
 
@@ -1038,7 +1038,7 @@ function end(){
   instrI.style.display = "inline";
   instrI.style.marginRight = "5%";
   instrI.style.textDecoration = "underline";
-  instrI.href = "https://78.media.tumblr.com/7db4fea6413654d8e7ce6db6dbf59cd0/tumblr_n7edj9VHt51sfzzico1_500.gif"
+  instrI.href = "https://78.media.tumblr.com/7db4fea6413654d8e7ce6db6dbf59cd0/tumblr_n7edj9VHt51sfzzico1_500.gif";
   terminal.append(instrI);
 
 
@@ -1049,6 +1049,7 @@ function end(){
   instrE.style.display = "inline";
   instrE.style.padding = "10px";
   instrE.style.textDecoration = "underline";
+  instrI.href = "/u/game";
   instrE.setAttribute('onclick',start);
   console.log(instrE);
   terminal.append(instrE);

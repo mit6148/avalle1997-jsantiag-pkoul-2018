@@ -1,3 +1,6 @@
+// FROM CATBOOK WORKSHOP ADVANCED
+// https://github.com/mit6148/catbook-advanced
+
 function main() {
   get('/api/whoami', {}, function(user) {
     renderNavbar(user);

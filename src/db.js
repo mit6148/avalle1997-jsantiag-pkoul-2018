@@ -1,3 +1,6 @@
+// FROM CATBOOK WORKSHOP ADVANCED
+// https://github.com/mit6148/catbook-advanced
+
 const mongoose = require('mongoose');
 
 // set up mongoDB connection
