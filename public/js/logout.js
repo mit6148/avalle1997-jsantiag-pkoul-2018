@@ -9,12 +9,12 @@
 
 $('div#topDiv').animate({
     //51% for chrome
-    height: "51%"
+    height: "50%"
     ,opacity: 1
 }, 300);
 $('div#bottomDiv').animate({
     //51% for chrome
-    height: "51%"
+    height: "50%"
     ,opacity: 1
 }, 300, function(){
         $('div#centerDiv').css({display: "block"}).animate({
@@ -28,5 +28,5 @@ $(document).ready(function () {
     // Handler for .ready() called.
     window.setTimeout(function () {
         location.href = "/";
-    }, 900);
+    }, 1000);
 });
