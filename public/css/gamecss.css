@@ -58,6 +58,8 @@ li a:hover {
     border: 1px solid green;
 }
 #terminal{
+  /* -webkit-transform: translateZ(0); /*ADD */
+  /* position: fixed;  /*ADD */
   margin-top:10px;
   margin-left:10px;
   border:1pt solid pink;
@@ -187,6 +189,7 @@ li a:hover {
    height: 20px;
    border-radius: 10px;
 }
+
 /* Terminal elements start here */
 img {
     display: block;
