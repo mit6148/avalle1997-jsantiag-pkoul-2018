@@ -46,7 +46,7 @@ width:29%;
 height:100%;
 position: fixed;
 left: 70.5%;
-margin-top:1% 
+margin-top:1%
 
 }
 
@@ -141,17 +141,17 @@ li a:hover {
 
 #playerStats {
   position: fixed;
-  top: 17%;
-  left: 81%;
+  top: 15.5%;
+  left: 77%;
   color:#00ff00;
   text-align: center;
-  font-size: 180%;
+  font-size: 200%;
   /* margin-top: 20px; */
 }
 
 #progressbar1 {
   position: fixed;
-  top: 22%;
+  top: 21.5%;
   left: 72%;
   background-color: #808080;
   border-radius: 13px; /* (height of inner div) / 2 + padding */
@@ -161,6 +161,8 @@ li a:hover {
   width:25%;
   font-family: 'VT323', monospace;
   font-weight:bold;
+  text-indent: 3%;
+  font-size: 130%;
 
 }
 
@@ -173,7 +175,7 @@ li a:hover {
 
 #progressbar2 {
   position: fixed;
-  top: 28%;
+  top: 27.5%;
   left: 72%;
   background-color: #808080;
   border-radius: 13px; /* (height of inner div) / 2 + padding */
@@ -183,6 +185,8 @@ li a:hover {
   width:25%;
   font-family: 'VT323', monospace;
   font-weight:bold;
+  text-indent: 3%;
+  font-size: 130%;
 
 }
 
@@ -195,7 +199,7 @@ li a:hover {
 
 #progressbar3 {
   position: fixed;
-  top: 34%;
+  top: 33.5%;
   left: 72%;
   background-color: #808080;
   border-radius: 13px; /* (height of inner div) / 2 + padding */
@@ -205,7 +209,8 @@ li a:hover {
   width:25%;
   font-family: 'VT323', monospace;
   font-weight:bold;
-
+  text-indent: 3%;
+  font-size: 130%;
 }
 
 #progressbar3 > div {
@@ -217,7 +222,7 @@ li a:hover {
 
 #progressbar4 {
   position: fixed;
-  top: 40%;
+  top: 39.5%;
   left: 72%;
   background-color: #808080;
   border-radius: 13px; /* (height of inner div) / 2 + padding */
@@ -227,6 +232,8 @@ li a:hover {
   width:25%;
   font-family: 'VT323', monospace;
   font-weight:bold;
+  text-indent: 3%;
+  font-size: 130%;
 }
 
 #progressbar4 > div {
