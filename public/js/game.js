@@ -666,7 +666,8 @@ function styleElement(el) {
       /*ADD */
       el.innerHTML = "CTRL+Q   |  CTRL+?";
       el.style.background = "#757575";
-      el.style.height = "30px";
+      el.style.height = "3%";
+      el.style.fontSize = "100%";
       el.style.color = "white";
       el.style.paddingLeft = "7px";
       el.style.paddingRight = "7px";
@@ -674,7 +675,7 @@ function styleElement(el) {
       el.style.borderStyle = "dashed double dashed double";
       el.style.position = "fixed";
       el.style.left = "85.5%";
-      el.style.bottom = "91%";
+      el.style.bottom = "93%";
       console.log("Element styled is in terminal-->game-->" + el.id);
     }
 
