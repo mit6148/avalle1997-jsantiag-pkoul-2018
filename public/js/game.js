@@ -32,7 +32,7 @@ function inputBox() {
     var input = this;
     setTimeout(function() {
 
-      var tmp = document.createElement("div");
+      var tmp = document.createElement("label");
       tmp.style.padding = "0";
       if (getComputedStyle)
         tmp.style.cssText = getComputedStyle(input, null).cssText;
@@ -124,6 +124,7 @@ function statTemplate(
   }
   return stat;
 }
+
 
 /* Find the rank of the newly computed value. If the rank changes update the stats currentRank.
    The value is assumed to be checked before function is called and up is a condition that is passed as a
@@ -389,6 +390,22 @@ var assStat = statTemplate(
   null
 );
 
+
+function checkStat(name,check){
+  if(name==="mpStat"){
+   return !!(mpStat.value =check);
+  }
+  if(name==="hpStat"){
+   return !!(hpStat.value === check);
+  }
+  if(name==="ssStat"){
+   return !!(ssStat.value === check);
+  }
+
+  if(name==="assStat"){
+   return !!(assStat.value === check);
+  }
+}
 // Player*******************************************************
 /* */
 // //---------------------------------------------------------------------
@@ -595,7 +612,7 @@ function styleElement(el) {
       el.style.display = "block";
       el.style.padding =  "1% 0% 0% 0%";
       el.style.textAlign = "center";
-      el.style.fontSize = "300%";
+      el.style.fontSize = "200%";
       el.style.lineHeight = "1";
       el.style.textTransform = "capitalize";
       console.log("Element styled is in terminal-->game-->" + el.id);
@@ -606,7 +623,7 @@ function styleElement(el) {
       el.style.textAlign = "none";
       el.style.lineHeight = ".9";
       el.style.justifyContent = "initial";
-      el.style.fontSize = "200%";
+      el.style.fontSize = "150%";
       console.log("Element styled is in terminal-->game-->" + el.id);
     }
     if (el.id === "question") {
@@ -614,14 +631,14 @@ function styleElement(el) {
       el.style.display = "block";
       el.style.padding =  "0% 6% 0% 6%";
       el.style.lineHeight = "1";
-      el.style.fontSize = "200%";
+      el.style.fontSize = "150%";
       console.log("Element styled is in terminal-->game-->" + el.id);
     }
     if (el.id === "optionsBox") {
       el.style.padding =  "0% 6% 0% 6%";
       el.style.lineHeight = "1";
       el.style.marginTop = "0%";
-      el.style.fontSize = "150%";
+      el.style.fontSize = "100%";
       // el.style.lineSpacing = "0.5em";
       el.style.marginRight = "5%";
       el.style.marginLeft = "5%";
@@ -737,7 +754,7 @@ function addInput(beforeNode, before) {
     "div",
     "terminal-head",
     "game",
-    "SWELL-ESL-EY:~ avalle$"
+    "SW-ELL-ESL-EY:~ avalle$"
   );
   lineHead.style.display = "inline-block";
   lineHead.style.fontSize = "18px";
@@ -796,8 +813,125 @@ function terminaloutput(narrator, txt, rapid) {
   typeWriter();
 }
 
+function displayList(obj, list, type, timing, txtSpeed) {
+  var optTiming = 600; //if want to have one line appear at a time.
+  var listObj = obj[list];
+  console.log(listObj);
+  var labels = Object.keys(listObj);
+  var container = makeElement("div", list + "Box", "game", "");
+
+  console.log(labels);
+  for (i = 0; i < labels.length; i++) {
+    var el = makeElement(type, list, "game", "[" + labels[i] + "] ");
+    var status = listObj[labels[i]][0];
+    console.log(status);
+    if (status === false) {
+      el.style.color = "red";
+    }
+    if (status === null) {
+      el.style.color = "#424242";
+    }
+    container.appendChild(el);
+    console.log(listObj[labels[i]]);
+    // if (timing !== null) {
+    //   var text = listObj[labels[i]][1];
+    //   setTimeout(terminaloutput, optTiming/2, el, text, txtSpeed);
+    //   optTiming += timing;
+    // } else {
+      el.innerHTML += listObj[labels[i]][1];
+   // }
+  }
+  if (list === "options") {
+    setTimeout(addInput, optTiming/2, document.getElementById(list + "Box"));
+  }
+  terminal.appendChild(container);
+}
+
+function clearCanvas(parentNode) {
+  while (parentNode.firstChild) {
+    parentNode.removeChild(parentNode.firstChild);
+  }
+}
+
+function displayunicode(e){
+var unicode=e.keyCode? e.keyCode : e.charCode;
+return unicode;
+}
+//Prompts the user for a valid response. Returns the selection.
+//User can enter at most one char.
+function getResponse(event) {
+  console.log(event.keyCode);
+
+  try{
+    var input = event.target.value.charCodeAt(0);
+    console.log(input);
+  if((event.target.value==="") & event.keyCode==13){
+    console.log("Invalid entry.");
+  }
+
+  //Hits the space bar and is avaiable.
+  if(validCodes[32][0] & event.keyCode===32 ){
+         console.log("START GAME.");
+         parentPointer = testEvent;
+         computeLists([player.belongings,parentPointer.options], true,false);
+         eventStory(testEvent); //First node
+      }
+
+  //User quits game and opt avaiable.
+  if (validCodes[17]!==null & validCodes[17]!==undefined & event.ctrlKey & event.keyCode===17 & validCodes[17][0]) {
+    console.log("QUIT GAME.");
+    parentPointer = null;
+    childPointer = null;
+    clearCanvas(terminal);
+    end();
+  }
+
+  //User gets game instructions and is avaiable.
+  if ( validCodes[63]!==null & validCodes[63]!==undefined & event.shiftKey & event.keyCode===63& validCodes[63][0]){
+      console.log("INSTRUCTIONS.");
+       // childPointer = testEvent;
+      clearCanvas(terminal);
+      help();
+     }
+
+  //Selects something that requres ENTER and is avaiable.
+  if(event.keyCode===13){
+    console.log("testing controls of user");
+    console.log(event.target.value);
+    console.log(validCodes[input]);
+    if(validCodes[input][2].attriType==="Decision"| validCodes[input][2].attriType==="Event"){
+      if(validCodes[input][0]!==null){
+       parentPointer = validCodes[input][2];
+      console.log(parentPointer);
+      childPointer = null;
+      }
+
+      clearCanvas(terminal);
+      //console.log(validCodes[input]);
+      eventStory(parentPointer);
+
+      console.log("Selected an option.");
+    }
+    if(validCodes[input][1]==="belonging"){
+      clearCanvas(terminal);
+      //disable for now
+      //childPointer = validCodes[input][2];
+      console.log("Selected a belonging");
+    }
+  }
+    return 1;
+  }
+  catch(err){
+    console.log("invalid entry");
+    return 0;
+  }
+
+  }
+
+
 //Show an entire event on the terminal.
 function eventStory(eventNode) {
+  clearCanvas(terminal);
   var ctrls = makeElement(
     "div",
     "terminal-ctrls",
@@ -842,134 +976,80 @@ function eventStory(eventNode) {
     timing += eventNode.description.length * 50;
   }
 
-  setTimeout(terminaloutput, timing, question, eventNode.question, 30, 10);
-  timing += eventNode.question.length * 70;
-  setTimeout(displayList, timing, testEvent, "options", "p", 6000, 30);
+  setTimeout(terminaloutput, timing, question, eventNode.question, 30, 60);
+  setTimeout(displayList, timing, parentPointer, "options", "p", 500, 70);
   displayList(player, "belongings", "div", null, null);
 }
 
-function displayList(obj, list, type, timing, txtSpeed) {
-  var optTiming = 600; //if want to have one line appear at a time.
-  var listObj = obj[list];
-  console.log(listObj);
-  var labels = Object.keys(listObj);
-  var container = makeElement("div", list + "Box", "game", "");
-
-  console.log(labels);
-  for (i = 0; i < labels.length; i++) {
-    var el = makeElement(type, list, "game", "[" + labels[i] + "] ");
-    var status = listObj[labels[i]][1];
-    console.log(status);
-    if (status === false) {
-      el.style.color = "red";
-    }
-    if (status === null) {
-      el.style.color = "#424242";
-    }
-    container.appendChild(el);
-    console.log(listObj[labels[i]]);
-    if (timing !== null) {
-      var text = listObj[labels[i]][0];
-      setTimeout(terminaloutput, optTiming, el, text, null);
-      optTiming += timing;
-    } else {
-      el.innerHTML += listObj[labels[i]][0];
-    }
-  }
-  if (list === "options") {
-    setTimeout(addInput, optTiming, document.getElementById(list + "Box"));
-  }
-  terminal.appendChild(container);
-}
-
-function clearCanvas(parentNode) {
-  while (parentNode.firstChild) {
-    parentNode.removeChild(parentNode.firstChild);
-  }
-}
-
-function displayunicode(e){
-var unicode=e.keyCode? e.keyCode : e.charCode
-return unicode;
-}
-//Prompts the user for a valid response. Returns the selection.
-//User can enter at most one char.
-function getResponse(event) {
-  console.log(event.keyCode);
-  try{
-    var input = event.target.value.charCodeAt(0);
-  if((event.target.value==="") & event.keyCode==13){
-    console.log("Invalid entry.");
-  }
-
-  //Hits the space bar and is avaiable.
-  if(validCodes[32][1]===true & event.keyCode===32 ){
-         console.log("START GAME.");
-         clearCanvas(terminal);
-         eventStory(testEvent); //First node
-      }
-
-  //User quits game and opt avaiable.
-  if (validCodes[17]!==null & validCodes[17]!==undefined & event.ctrlKey & event.keyCode===17 & validCodes[17][1]) {
-    console.log("QUIT GAME.");
-    end();
-  }
-
-  //User gets game instructions and is avaiable.
-  if ( validCodes[63]!==null & validCodes[63]!==undefined & event.shiftKey & event.keyCode===63& validCodes[63][1]){
-      console.log("INSTRUCTIONS.");
-      help();
+var d1d = {
+  attriType: "Decision",
+  title:"You decide to seek out your friends",
+  description: "You only reach out to three people and they are all too busy with preparing for their upcoming midterms to spend any time talking or being in the same space with you.",
+  question: "You feel let down, but tell each of them that everything is fine. Everything is not fine,how do you cope?",
+  options: {
+    A: [null,"retreat to your room to cry it out and hope that things get better."],
+    B: [null,"Go into hibernation mode and sleep through the week"],
+    C: [null,"Throw yourself into your work and use that as an escape"]
      }
+};
 
-  //Selects something that requres ENTER and is avaiable.
-  if(event.keyCode===13){
-    console.log("testing controls of user");
-    console.log(event.target.value);
-    if(validCodes[input][0]=="option"){
-      console.log("Selected an option.");
-    }
-    if(validCodes[input][0]=="belonging"){
-      console.log("Selected a belonging");
-    }
-  }
-    return 1;
-  }
-  catch(err){
-    console.log("invalid entry");
-    return 0;
-  }
+var d1c = {
+  attriType: "Decision",
+  title: "You just want to get through being on campus right now, and smoking weed helps a lot. It’s an expensive habit...",
+  description: "You just want to get through, You smoked what was left of your stash that night in the comfort of your own room and one of your floormates slipped an anonymous note under the door notifying you that they are planning on reaching out to campus police out of concern for your wellbeing",
+  question:"how do you deal?",
+  options: {
+    A: [null,"Angrily knock on everyone’s door in search of the culprit"],
+    B: [null,"Immediately stash all of your paraphernalia outside in the bushes and febreeze until you can hardly breathe. Plan of action? Deny, deny, deny."],
+    C: [null,"Decide that whoever it is might have a point and just let it happen, risking your scholarship and aid."]
+     }
+};
 
-  }
 
+var d1b = {
+  attriType: "Decision",
+  title: "Your main priority is to try to get home and be with family during break. You start looking for a second job, in the meantime you start selling things on free and for sale.",
+  description: "Two weeks go by. You are doing well in your focus and that has helped your general state some. Unfortunately, the professor in your major track notifies you that you are at risk of not passing their class",
+  question:"What do you do?",
+  options: {
+    A: [null,"Set up a meeting with your professor to discuss any ways to salvage the grade."],
+    B: [null,"Drop the class."],
+    C: [null,"Go to your dean and see if they can help facilitate asking for an incomplete to be finished during the first week of the next semester."]
+     }
+};
+
+var d1a= {
+  attriType: "Decision",
+  title: "Talk to your Dean, and try to explain the situation to all your Professors. You could use some relaxed deadlines right now..",
+  description: "Only one of your four professors this semester responds with support. The professor in your major track tells you that this institution is a place of intense academic rigor and that this was what you chose. They end their message with the following: ‘...perhaps you should consider pursuing another field of study.’",
+  question:"You are feeling more desperate now than before, what do you do?",
+  options: {
+    A: [null,"Put all your effort into one class and hope for the best in the others."],
+    B: [ null,"Drop the class in your major track and take the hit in the hopes that it will make getting through your remaining courses doable"],
+    C: [ null,"Stop going to class and put all your effort into getting home"]
+     }
+};
 
 
 var testEvent = {
   attriType: "Event",
-  title: "Based God takes no L's.",
-  description:
-    "You were walking home from school when you noticed that the 'Based God' forgot to fuck all your bitches.",
-  question: "What do you do?",
-  options: {
-    A: [
-      "Go back home and rip it. Repent to the gods and hope for the best.",
-      false
-    ],
-    B: ["Call up the based god and see if they are still willing to.", true],
-    C: ["Go home and cry. You can't come back from this.", true]
-  }
+  title: "The Blue Period",
+  description:"You experience a very traumatic family event in the middle of the semester. Your mental health isn't doing great, and you're worried you may not finish the semester on time.",
+  question:"What do you do?",
+  options: { A: [true, d1a.title, d1a], B: [true, d1b.title, d1b],
+  C: [ true, d1c.title, d1c], D:[true, d1d.title, d1d]
+     }
 };
+
 
 //Belongings
 var player = {
   name: "Player",
   age: 52,
   belongings: {
-    0: ["Backpack", null],
-    1: ["Journal", true],
-    2: ["Phone", false],
-    3: ["Backpack", null],
-    4: ["Journal", true],
-    5: ["Phone", false]
+    0: [null,"Backpack"],
+    1: [true,"Journal"],
+    2: [ null,"Journal"],
   }
 };
 
@@ -979,20 +1059,59 @@ var childPointer = null;
 var validCodes = {
 };
 
-validCodes[17] = ["terminal", true];
-validCodes["A".charCodeAt(0)] = ["option", true];
-validCodes["0".charCodeAt(0)] = ["belonging", true];
-validCodes["?".charCodeAt(0)] = ["terminal", true];
-validCodes[32] = ["spacebar", true];
+
+function computeLists(dic1,terminal,spacebar){
+  console.log(dic1);
+  if(terminal){
+  validCodes[17] = [true,"terminal"];
+  validCodes["?".charCodeAt(0)] = [true,"terminal"];
+  }
+  if(spacebar){
+    validCodes[32] = [ true,"spacebar"];
+  }
+
+  try{
+    console.log("Number of lists: "+dic1.length);
+    for(i=0;i<dic1.length;i++){
+
+      var opts = Object.keys(dic1[i]);
+      console.log(opts.length);
+      for(j=0; j<opts.length;j++){
+        console.log([opts[j].charCodeAt(0)]);
+        validCodes[opts[j].charCodeAt(0)] = dic1[i][opts[j]];
+      }
+
+    }
+  }
+  catch(err){
+     //alert("No items present");
+    console.log("Testing try/catch in list dispaly");
+  }
+
+  }
+
+
+
+// computeLists(player.belongings);
+// computeLists(testEvent.options);
+
+// validCodes[17] = ["terminal", true];
+// validCodes["A".charCodeAt(0)] = ["option", true];
+// validCodes["?".charCodeAt(0)] = ["terminal", true];
+//
+console.log(validCodes);
 
 function game() {
+  terminal.setAttribute("onclick",terminalFocus);
+  validCodes[32] = [ true,"spacebar"];
 
   start();
-  terminal.setAttribute("onclick",terminalFocus);
+
   console.log(start);
 }
 
 function start(){
+  clearCanvas(terminal);
   var home = makeElement("div", "title", "start", "WANDA'S WORLD");
   terminal.append(home);
   //SPACE keycode= 32.
@@ -1049,7 +1168,6 @@ function end(){
   instrE.style.display = "inline";
   instrE.style.padding = "10px";
   instrE.style.textDecoration = "underline";
-  instrI.href = "/u/game";
   instrE.setAttribute('onclick',start);
   console.log(instrE);
   terminal.append(instrE);
