@@ -3,20 +3,24 @@
 
 body{
   background: linear-gradient(black, #862d59);
-  height:98vh;
+  height:70%;
 }
 
 
 header {
 width: 100%;
 background:#4E4C4D;
-padding-left: 8px
+padding-left: 1%
+}
+
+#head-container {
+  height: 15%;
 }
 
 h1 {
 float: left;
 width:68%;
-height:90px;
+height:100%;
 background:#13060d;
 border: 3px solid #00ff00;
 text-align: center;
@@ -30,24 +34,26 @@ margin-bottom:10px;
 nav {
 float: right;
 width:29%;
-height:91px;
+height:100%;
 }
 
 ul {
     list-style-type: none;
     margin: 1px;
-    overflow: hidden;
+    /* overflow: hidden; */
     background-color: #111;
+    height: 100%;
 
 }
 
 li a {
     display: block;
     font-family: 'VT323', monospace;
-    font-size: 20pt;
+    font-size: 200%;
     color: #00ff00;
     text-align: center;
-    padding: 10px 10px;
+    height: 100%;
+    /* padding: 10px 10px; */
     text-decoration: none;
     margin-right:55px;
 }
