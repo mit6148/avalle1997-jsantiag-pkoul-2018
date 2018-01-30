@@ -49,6 +49,19 @@ function styleElement(el) {
       console.log("Element styled is in terminal-->game-->" + el.id);
     }
 
+    //Style the user input element.
+    if (el.id === "user-input") {
+      el.style.fontSize = "16px";
+      el.style.background = "transparent";
+      el.style.color = "transparent";
+      el.style.border = "none";
+      el.style.letterSpacing = "2px";
+      el.setAttribute("maxLength",1);
+      el.setAttribute("onkeypress", "getResponse(event)");
+      console.log(el);
+      console.log("Element styled is in terminal of type: input");
+    }
+
   }
 }
 
@@ -129,27 +142,89 @@ function styleElement(el) {
     typeWriter();
   }
 
+  //Add an input line for the user to respond in and call the getResponse onkeypress.
+  function addInput(beforeNode, before) {
+    var userIn = makeElement("INPUT", "user-input", "game", "");
+    userIn.style.display = "inline-block";
+    var lineHead = makeElement(
+      "div",
+      "terminal-head",
+      "game",
+      "SW-ELL-ESL-EY:~ avalle$"
+    );
+    lineHead.style.display = "inline-block";
+    lineHead.style.fontSize = "18px";
+    lineHead.style.paddingBottom = "4px";
+    userIn.style.paddingBottom = "4px";
+    // terminal.append(lineHead);
+    // terminal.append(userIn);
+    // inputBox();
+    userIn.focus();
+    console.log(beforeNode);
+    var cursor = makeElement("label", "input-cursor", "game", "");
+    terminal.append(cursor);
+    cursor.style.display = "inline";
+  }
+
+  //Add an input line for the user to respond in and call the getResponse onkeypress.
+  // function addInput(beforeNode, before) {
+  //   var userIn = makeElement("INPUT", "user-input", "game", "");
+  //   userIn.style.display = "inline-block";
+  //   var lineHead = makeElement(
+  //     "div",
+  //     "terminal-head",
+  //     "game",
+  //     "SW-ELL-ESL-EY:~ avalle$"
+  //   );
+  //   lineHead.style.display = "inline-block";
+  //   lineHead.style.fontSize = "18px";
+  //   lineHead.style.paddingBottom = "4px";
+  //   userIn.style.paddingBottom = "4px";
+  //   // terminal.append(lineHead);
+  // //  terminal.append(userIn);
+  //   // inputBox();
+  //   userIn.focus();
+  //   console.log(beforeNode);
+  //   var cursor = makeElement("label", "input-cursor", "game", "");
+  //   terminal.append(cursor);
+  //   cursor.style.display = "inline";
+  // }
+
   //Show an entire event on the terminal.
   function eventStory(eventNode) {
-    var descriEvent=null;
+    var ctrls = makeElement(
+      "div",
+      "terminal-ctrls",
+      "game",
+      "CTRL+Q   |  CTRL+?"
+    ); /*ADD */
+    console.log(ctrls);
+    //terminal.appendChild(ctrls);
+
+    var descriEvent = null;
     if (eventNode.attriType === "Event") {
-      var titleEvent = makeElement("div", "title", "game","'" + eventNode.title + "'</br>");
+      var titleEvent = makeElement(
+        "div",
+        "title",
+        "game",
+        "'" + eventNode.title + "'</br>"
+      );
       terminal.appendChild(titleEvent);
       console.log("title");
 
-      descriEvent = makeElement("div", "description", "game","");
+      descriEvent = makeElement("div", "description", "game", "");
       terminal.appendChild(descriEvent);
       console.log("description");
     }
 
-    var question = makeElement("div", "question", "game","");
+    var question = makeElement("div", "question", "game", "");
     terminal.appendChild(question);
-    console.log("question");
+    console.log("quesion");
 
-    var timing = 500;
+    var timing = 1000;
 
     //If it is an event and not a decision point
-    if(descriEvent !==null){
+    if (descriEvent !== null) {
       setTimeout(
         terminaloutput,
         timing,
@@ -161,47 +236,45 @@ function styleElement(el) {
       timing += eventNode.description.length * 50;
     }
 
-    setTimeout(
-      terminaloutput,
-      timing,
-      question,
-      eventNode.question,
-      30,
-      10
-    );
-
-    timing += eventNode.question.length *50;
-    setTimeout(setTimeout,timing,displayOptions,500,eventNode,5000,50);
+    setTimeout(terminaloutput, timing, question, eventNode.question, 30, 10);
+    timing += eventNode.question.length * 70;
+    setTimeout(displayList, timing, testEvent, "options", "p", 6000, 30);
+    // displayList(player, "belongings", "div", null, null);
   }
 
+  function displayList(obj, list, type, timing, txtSpeed) {
+    var optTiming = 600; //if want to have one line appear at a time.
+    var listObj = obj[list];
+    console.log(listObj);
+    var labels = Object.keys(listObj);
+    var container = makeElement("div", list + "Box", "game", "");
 
-    function displayOptions(eventNode,timing,txtSpeed){
-      var optTiming = 300;
-      var optionLabels = Object.keys(eventNode.options);
-      var optionsBox = makeElement("div","optionsBox","game","");
-      terminal.appendChild(optionsBox);
-
-      console.log(optionLabels);
-      for (i = 0; i < optionLabels.length; i++) {
-        var option = makeElement(
-          "p",
-          "options",
-          "game",
-          "["+optionLabels[i]+"] "
-        );
-        var status = eventNode.options[optionLabels[i]][1];
-        if(status ==false | status==null){
-          option.style.color = "red";
-        }
-        optionsBox.appendChild(option);
-
-        var text = eventNode.options[optionLabels[i]][0];
-
-         setTimeout(terminaloutput, optTiming, option, text, txtSpeed, 15);
-        optTiming += timing;
+    console.log(labels);
+    for (i = 0; i < labels.length; i++) {
+      var el = makeElement(type, list, "game", "[" + labels[i] + "] ");
+      var status = listObj[labels[i]][1];
+      console.log(status);
+      if (status === false) {
+        el.style.color = "red";
       }
-      // setTimeout(addInput, optTiming, optionsBox);
+      if (status === null) {
+        el.style.color = "#424242";
+      }
+      container.appendChild(el);
+      console.log(listObj[labels[i]]);
+      if (timing !== null) {
+        var text = listObj[labels[i]][0];
+        setTimeout(terminaloutput, optTiming, el, text, txtSpeed);
+        optTiming += timing;
+      } else {
+        el.innerHTML += listObj[labels[i]][0];
+      }
     }
+    if (list === "options") {
+      setTimeout(addInput, optTiming, document.getElementById(list + "Box"));
+    }
+    terminal.appendChild(container);
+  }
 
 
   var testEvent = {
@@ -225,24 +298,5 @@ function styleElement(el) {
 
   eventStory(testEvent);
 
+
   main();
-
-
-
-  // const descriptionDiv = document.getElementById('description');
-  // descriptionDiv.innerHTML = "This is a text based role playing game about navigating Wellesley College.";
-  //
-  //
-  // renderStories(user);
-  //
-  // const socket = io();
-  //
-  // socket.on('post', function(msg) {
-  //     const storiesDiv = document.getElementById('stories');
-  //     storiesDiv.prepend(storyDOMObject(msg,user));
-  // });
-  //
-  // socket.on('comment', function(msg) {
-  //   const commentDiv = document.getElementById(msg.parent + '-comments');
-  //   commentDiv.appendChild(commentDOMObject(msg));
-  // });
