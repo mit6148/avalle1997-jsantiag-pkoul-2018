@@ -1,3 +1,7 @@
+// FROM CATBOOK WORKSHOP ADVANCED
+// https://github.com/mit6148/catbook-advanced
+
+
 function newNavbarItem(text, url) {
   itemLink = document.createElement('a');
   itemLink.className = 'nav-item nav-link';

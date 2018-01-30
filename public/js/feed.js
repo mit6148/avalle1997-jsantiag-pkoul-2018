@@ -1,3 +1,7 @@
+// FROM CATBOOK WORKSHOP ADVANCED
+// https://github.com/mit6148/catbook-advanced
+
+
 function storyDOMObject(storyJSON, user) {
   const card = document.createElement('div');
   card.setAttribute('id', storyJSON._id);

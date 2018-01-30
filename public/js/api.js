@@ -1,3 +1,6 @@
+// FROM CATBOOK WORKSHOP ADVANCED
+// https://github.com/mit6148/catbook-advanced
+
 // Source: https://stackoverflow.com/questions/8064691/how-do-i-pass-along-variables-with-xmlhttprequest
 function formatParams(params) {
   return Object
