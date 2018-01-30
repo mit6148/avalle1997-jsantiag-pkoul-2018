@@ -85,7 +85,7 @@ li a:hover {
   margin-bottom:5px;
   height:31vh;
   width:95%;
-  background-color: black;
+  background-color:#260d1a;
 
 }
 #bbybby{
@@ -104,6 +104,88 @@ li a:hover {
 
 }
 
+#playerStats {
+  color:#00ff00;
+  text-align: center;
+  font-size: 18pt;
+  margin-top: 20px;
+}
+
+#progressbar1 {
+  background-color: #808080;
+  border-radius: 13px; /* (height of inner div) / 2 + padding */
+  padding: 5px;
+  margin-top: 40px;
+  margin-left:40px;
+  width:80%;
+  font-family: 'VT323', monospace;
+  font-weight:bold;
+
+}
+
+#progressbar1 > div {
+   background-color: orange;
+   width: 40%; /* Adjust with JavaScript */
+   height: 20px;
+   border-radius: 10px;
+}
+
+#progressbar2 {
+  background-color: #808080;
+  border-radius: 13px; /* (height of inner div) / 2 + padding */
+  padding: 5px;
+  margin-top: 18px;
+  margin-left:40px;
+  width:80%;
+  font-family: 'VT323', monospace;
+  font-weight:bold;
+
+}
+
+#progressbar2 > div {
+   background-color: orange;
+   width: 40%; /* Adjust with JavaScript */
+   height: 20px;
+   border-radius: 10px;
+}
+
+#progressbar3 {
+  background-color: #808080;
+  border-radius: 13px; /* (height of inner div) / 2 + padding */
+  padding: 5px;
+  margin-top: 18px;
+  margin-left:40px;
+  width:80%;
+  font-family: 'VT323', monospace;
+  font-weight:bold;
+
+}
+
+#progressbar3 > div {
+   background-color: orange;
+   width: 40%; /* Adjust with JavaScript */
+   height: 20px;
+   border-radius: 10px;
+}
+
+#progressbar4 {
+  background-color: #808080;
+  border-radius: 13px; /* (height of inner div) / 2 + padding */
+  padding: 5px;
+  margin-top: 18px;
+  margin-left:40px;
+  width:80%;
+  font-family: 'VT323', monospace;
+  font-weight:bold;
+
+}
+
+#progressbar4 > div {
+   background-color: orange;
+   width: 40%; /* Adjust with JavaScript */
+   height: 20px;
+   border-radius: 10px;
+}
 /* Terminal elements start here */
 img {
     display: block;
