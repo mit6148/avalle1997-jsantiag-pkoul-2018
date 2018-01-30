@@ -168,7 +168,7 @@ ol {
 #user-input:focus {
    outline: none;
    color: transparent;
-   bachground:transparent;
+   background:transparent;
  }
 
 #input-cursor {

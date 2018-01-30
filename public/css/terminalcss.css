@@ -6,7 +6,7 @@ body{
     border: none;
     color: transparent;
     display: inline-block;
-    padding-left: 150px;
+    padding-left: 30px;
     font-size: 1.2em;
     text-shadow: 8px 4px 0 purple;
     padding-right:none;
@@ -24,7 +24,7 @@ body{
   display: inline-block;
 }
 
-#user-input:after {
+/* #user-input:after {
   content: '';
   width: 20px;
   height: 5px;
@@ -41,7 +41,7 @@ body{
   100% {
     opacity: 1;
   }
-}
+} */
 
 #terminal{
   color: black;
