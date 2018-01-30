@@ -4,6 +4,15 @@ body {
   font-family: 'VT323', monospace;
   font-weight: 300;
 }
+
+.nav-link {
+  font-size: 150%;
+}
+
+.navbar-brand {
+  font-size: 175%;
+}
+
 .description {
   text-align: center;
   vertical-align: middle;
@@ -30,4 +39,4 @@ body {
 .feed-container {
 	padding: 1rem 0;
 	background: #e6ffee;
-} 
+}
