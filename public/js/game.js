@@ -454,7 +454,6 @@ function journal(transitionText, currentEvent, eventCarryLimit) {
 
   function addEntry(currentNode, nextNode, interruption, status) {
     var transitionType;
-    //if()
 
     //Save the last Event and last decision made by player.
     var lastEvent = path[path.length - 1];
@@ -503,119 +502,47 @@ function journal(transitionText, currentEvent, eventCarryLimit) {
   // setEventStatus//terminated, completed, null(for static required)
 }
 
-var liCount = 1;
-var liMAX = 20;
-var terminal = document.getElementById("terminal");
-var userresponse = "";
+/*****************************PAGE STYLING AND ELEMENT CREATING***/
 
-var i = 0;
-var txt = "Testing terminal abilities";
-var speed = 70;
-
-//working
-function makeSection(type) {
-  var section = document.createElement(type);
-  section.style.color = " #55ff55";
-  section.class = "prompt";
-  section.style.fontSize = "40px";
-  section.id = "textTo";
-  liCount += 1;
-  //insertBefore(elementtoInsert, BeforeWhatElement)
-  terminal.appendChild(section);
-  return section;
-}
-//var narrator = makeWendy("div");  //Working\
-function terminaloutput(narrator, txt, rapid, wordlimit) {
-  var i = 0;
-  var words = 0;
-  var speed = 80;
-
-  if (rapid !== null) {
-    speed = rapid;
-  }
-  function typeWriter() {
-    if (i < txt.length) {
-      var charNow = txt.charAt(i);
-      console.log(charNow);
-      if (charNow === " ") {
-        if (words == wordlimit) {
-          narrator.innerHTML += "</br>";
-          words = 0;
-        }
-
-        words += 1;
-        console.log(words);
-        if (
-          (txt.charAt(i - 1) === ".") |
-          (txt.charAt(i - 1) === "?") |
-          (txt.charAt(i - 1) === "!") |
-          (txt.charAt(i - 1) === "”")
-        ) {
-          narrator.innerHTML += "</br>";
-          words = 0;
-          console.log("fdfgdgfdgdfgd");
-        }
-      }
-      narrator.innerHTML += charNow;
-      i++;
-      setTimeout(typeWriter, speed);
-    }
-  }
-  typeWriter();
-}
-function addInput(beforeNode) {
-  var temp = document.createElement("div");
-  temp.contentEditable = true;
-
-  temp.setAttribute("onkeypress", "getResponse(event)");
-
-  temp.id = "user-input";
-  insertAfter(temp, beforeNode);
-  temp.focus();
-}
-
-var title = "Based God takes no L's.";
-var description =
-  "You were walking home from school when you noticed that the Based God forgot to fuck all your bitches. What do you do?";
-var intro =
-  "Welcome to the game. It is intended to do really important things for the Based God.";
-
-function eventStory() {
-  var titleEvent = makeSection("div");
-  titleEvent.style.display = "block";
-  titleEvent.style.textAlign = "center";
-  // titleEvent.style.paddingLeft = "20px;"
-
-  titleEvent.innerHTML = title + "</br>";
-  var descriEvent = makeSection("div");
-  descriEvent.style.fontSize = "20px";
-  descriEvent.style.paddingLeft = "150px";
-  setTimeout(terminaloutput, 2000, descriEvent, description, 30, 10);
-  setTimeout(addInput, 6000, descriEvent);
-}
-
-setTimeout(eventStory,1000);
-
-function insertAfter(el, referenceNode) {
-  referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
-}
-
+//Prompts the user for a valid response. Returns the selection.
 function getResponse(event) {
-  var ctrl = event.ctrlKey;
-  console.log("checking");
-  console.log(event.keyCode);
+  //User tries to quit --> ctrl+q
+  if (event.ctrlKey & (event.keyCode === 17)) {
+    //turn off writability while you process their input.
+    event.target.setAttribute("contenteditable", false);
+    //Hide element from user.
+    event.target.style.display = "none";
+    console.log("quit game. ");
+  }
+  //User tries to get instructions --> shift+?
+  if (event.shiftKey & (event.keyCode === 63)) {
+    //turn off writability while you process their input.
+    event.target.setAttribute("contenteditable", false);
+    console.log("Get game instructions.");
+  }
+
+  //User enters their response --> ENTER
   if (event.keyCode === 13) {
-    event.target.setAttribute("contenteditable",false);
-    console.log("User selects input.");
-    console.log(event.target);
-    //console.log("User input length: " + event.innerText.length);
-    if (event.target.innerText > 1) {
+    console.log("User hits ENTER.");
+    //turn off writability while you process their input.
+    event.target.setAttribute("contenteditable", false);
+
+    //Check if the user entered more than one key. ADD OR INVALID ENTRY FOR THISDECISION
+    if (event.target.innerText.length > 1) {
       console.log("Invalid entry. Must be one char long");
+      //Clear their content
       event.target.innerText = "";
+
+      //Get this input to be the next thing focused on by the window.
       event.target.focus();
+
+      //Let the user edit the input box again. **NOT WORKING**
+      event.target.setAttribute("contenteditable", true);
     } else {
+      //Get the key they entered and the element they entered in.
       var selection = event.keyCode;
       var el = event.target;
+      //Disconnect the writability
       el.setAttribute("disabled", true);
       if ((event.keyCode >= 97) & (event.keyCode >= 122)) {
         console.log("Selected: Story option [A-Z]");
@@ -628,13 +555,377 @@ function getResponse(event) {
       }
     }
   }
+}
 
-  if (ctrl & (event.keyCode === 17)) {
-    console.log("quit game. ");
-  }
-  if (event.shiftKey & (event.keyCode === 63)) {
-    console.log("Get game instructions.");
+//Add an input line for the user to respond in and call the getResponse onkeypress.
+function addInput(beforeNode) {
+  var userIn = makeElement(
+    "div",
+    "user-input",
+    "game",
+    ""
+  );
+
+  insert(userIn, beforeNode, false);
+  inputBox();
+  userIn.focus();
+  var cursor = document.getElementById("input-cursor");
+  document.getElementById("terminal").append(cursor);
+  cursor.style.display = "inline-block";
+}
+
+/* Make an element object*/
+function makeElement(type, id, className,content) {
+  if (type === null) {
+    console.log("Element has no type and no reference. Couldn't be created");
+  } else {
+    //Create an element of said type.
+    var el = document.createElement(type);
+    el.id = id;
+    el.className = className;
+    el.innerHTML = content;
+    console.log("New ELEMENT id: " + el.id);
+    console.log("ClassName: " + el.className);
+    console.log(el);
+    styleElement(el);
+    return el;
   }
 }
 
-//var myVar = setTimeout(addInput,intro.length*30+1000);
+//For styling different elements most set to general unless specified.
+function styleElement(el) {
+  el.style.color = " #CFD8DC";
+  //el.style.fontFamily = "Dhurjati";
+  console.log("Styling an element from the terminal.");
+  //Style the "Start Game" page.
+  if (el.className === "start") {
+    el.style.display = "block";
+    el.style.textAlign = "center";
+    el.style.justifyContent = "center";
+    el.style.fontSize = "44px";
+    console.log("Element styled is in terminal of type: start");
+  }
+
+  //Style the Game text
+  if (el.className === "game") {
+    console.log("is in fact in game");
+    if (el.id === "title") {
+      el.style.display = "block";
+      el.style.textAlign = "center";
+      el.style.fontSize = "36px";
+      el.style.lineHeight = "1";
+      el.style.textTransform = "capitalize";
+      console.log("Element styled is in terminal-->game-->" + el.id);
+    }
+
+    // ADDED LEFT AND RIGHT PADDING TO THE DESCRIPTION
+
+    if (el.id === "description") {
+      el.style.display = "block";
+      el.style.padding =  "0px 30px 0px 30px";
+      el.style.textAlign = "none";
+      el.style.lineHeight = ".9";
+      el.style.justifyContent = "initial";
+      el.style.fontSize = "26px";
+      console.log("Element styled is in terminal-->game-->" + el.id);
+    }
+
+    // ADDED LEFT AND RIGHT PADDING TO THE QUESTIOn
+
+    if (el.id === "question") {
+      console.log("Is in fact a question.");
+      el.style.display = "block";
+      el.style.padding =  "0px 30px 0px 30px";
+      el.style.lineHeight = "1.5";
+      // el.style.textAlign = "none";
+      //el.style.justifyContent = "initial";
+      el.style.fontSize = "26px";
+      console.log("Element styled is in terminal-->game-->" + el.id);
+    }
+    if (el.id === "optionsBox") {
+      el.style.lineHeight = "1";
+      el.style.marginTop = "0px";
+      el.style.fontSize = "18px";
+      el.style.lineSpacing = "1em";
+      el.style.marginRight = "10%";
+      el.style.marginLeft = "10%";
+      el.style.textAlign = "left";
+      console.log("Element styled is in terminal-->game-->" + el.id);
+    }
+    if (el.id === "belongings") {
+      el.style.display = "block";
+      el.style.textAlign = "none";
+      el.style.justifyContent = "initial";
+      el.style.fontSize = "26px";
+      console.log("Element styled is in terminal-->game-->" + el.id);
+    }
+    if (el.id === "terminal-ctrls") {
+      el.style.display = "block";
+      el.style.textAlign = "none";
+      el.style.justifyContent = "initial";
+      el.style.fontSize = "24px";
+      console.log("Element styled is in terminal-->game-->" + el.id);
+    }
+
+    //Style the "End Game" text.
+    if (el.id === "end") {
+      el.style.display = "block";
+      el.style.textAlign = "center";
+      el.style.justifyContent = "center";
+      el.style.fontSize = "44px";
+      console.log("Element styled is in terminal of type: end");
+    }
+
+    //Style the user input element.
+    if (el.id === "user-input") {
+      el.style.fontSize = "18px";
+      el.style.background = "transparent";
+      el.style.color = "transparent";
+      el.style.border = "none";
+      el.style.width = "10px";
+      el.setAttribute("onkeypress", "getResponse(event)");
+      console.log("Element styled is in terminal of type: input");
+    }
+  }
+
+  if (el.className === "statPanel") {
+    console.log("Styling an element of the statPanel");
+  }
+
+  if (el.className === "map") {
+    console.log("Styling an element of the statPanel");
+  }
+
+  if (el.className === "progressBar") {
+    console.log("Styling an element of the statPanel");
+  }
+}
+
+//Insert new element on page.
+function insert(newElement, targetElement, before) {
+  //Check if valid input
+  if ((newElement === null) | (targetElement === null)) {
+    console.log(
+      "No element entered. Either new element or target element is null."
+    );
+  } else {
+    //Target Element is the parent. Insert element at end of list.
+    if (before === null) {
+      referencept = null;
+      targetElement.appendChild(newElement);
+      console.log(
+        "Target element is the target parent. Elemnet added at end of child node list."
+      );
+    } else if (!before) {
+      //Add the element after the target Element
+      targetElement.parentNode.insertBefore(
+        newElement,
+        targetElement.nextSibling
+      );
+      console.log(
+        "Position  new element after target Element: " + targetElement.id
+      );
+    } else {
+      targetElement.parentNode.insertBefore(newElement, targetElement);
+      console.log(
+        "Position  new element after target Element: " + targetElement.id
+      );
+    }
+    //Insert the element at specifed location.
+  }
+}
+
+var liCount = 1;
+var liMAX = 20;
+var terminal = document.getElementById("terminal");
+var userresponse = "";
+
+//Show text in a type writer fashion on the terminal **FIX**
+function terminaloutput(narrator, txt, rapid, wordlimit) {
+  console.log("print to terminal");
+  var i = 0;
+  var words = 0;
+  var speed = 80;
+  console.log(narrator);
+  console.log(txt);
+
+  if (narrator.id === "description") {
+    narrator.innerHTML = "STORY: ";
+  }
+
+  if (narrator.id === "question") {
+    narrator.innerHTML = "Q: ";
+  }
+
+  if (rapid !== null) {
+    speed = rapid;
+  }
+  function typeWriter() {
+    if (i <= txt.length) {
+      var charNow = txt.charAt(i);
+      //console.log(charNow);
+      if (txt.charAt(i) === "?") {
+        console.log("Break for '?'");
+        console.log("word length: " + words);
+        charNow += "</br>";
+      }
+      if (charNow === " ") {
+        // if (words == wordlimit) {
+        //   console.log("Break for word length");
+        //   console.log("word length: " + words);
+        //   narrator.innerHTML += "</br>";
+        //   words = 0;
+        // } else {
+        //   words += 1;
+        // }
+        console.log(words);
+        //         if ( //(txt.charAt(i - 1) === "!") | add?
+        //           (txt.charAt(i - 1) === ".") |
+
+        //           (txt.charAt(i - 1) === "”")
+        //         ) {
+        //           console.log("Break for '.' or '!' or 'quotes' ");
+        //           console.log("word length: " + words);
+        //           narrator.innerHTML += "</br>";
+        //           words = 0;
+        //         }
+      }
+
+      narrator.innerHTML += charNow;
+      i++;
+      setTimeout(typeWriter, speed);
+    }
+  }
+  typeWriter();
+}
+
+//Show an entire event on the terminal.
+function eventStory(eventNode) {
+  var descriEvent=null;
+  if (eventNode.attriType === "Event") {
+    var titleEvent = makeElement("div", "title", "game","'" + eventNode.title + "'</br>");
+    terminal.appendChild(titleEvent);
+    console.log("title");
+
+    descriEvent = makeElement("div", "description", "game","");
+    terminal.appendChild(descriEvent);
+    console.log("description");
+  }
+
+  var question = makeElement("div", "question", "game","");
+  terminal.appendChild(question);
+  console.log("quesion");
+
+  var timing = 1000;
+
+  //If it is an event and not a decision point
+  if(descriEvent !==null){
+  setTimeout(
+    terminaloutput,
+    timing,
+    descriEvent,
+    eventNode.description,
+    30,
+    10
+  );
+    timing += eventNode.description.length * 50;
+  }
+
+  setTimeout(
+    terminaloutput,
+    timing,
+    question,
+    eventNode.question,
+    30,
+    10
+  );
+
+
+  timing += eventNode.question.length *50;
+  setTimeout(setTimeout,timing,displayOptions,500,eventNode,5000,50);
+}
+
+
+function displayOptions(eventNode,timing,txtSpeed){
+  var optTiming = 600;
+  var optionLabels = Object.keys(eventNode.options);
+  var optionsBox = makeElement("div","optionsBox","game","");
+  terminal.appendChild(optionsBox);
+
+  console.log(optionLabels);
+  for (i = 0; i < optionLabels.length; i++) {
+    var option = makeElement(
+      "p",
+      "options",
+      "game",
+      "["+optionLabels[i]+"] "
+    );
+    var status = eventNode.options[optionLabels[i]][1];
+    if(status ==false | status==null){
+      option.style.color = "red";
+    }
+    optionsBox.appendChild(option);
+
+    var text = eventNode.options[optionLabels[i]][0];
+
+     setTimeout(terminaloutput, optTiming, option, text, txtSpeed, 15);
+    optTiming += timing;
+  }
+  setTimeout(addInput, optTiming, optionsBox);
+}
+
+
+
+var testEvent = {
+  attriType: "Event",
+  title: "Based God takes no L's.",
+  description:
+    "You were walking home from school when you noticed that the 'Based God' forgot to fuck all your bitches.",
+  question: "What do you do?",
+  options: {
+    A: [
+      "Go back home and rip it. Repent to the gods and hope for the best.",
+      false
+    ],
+    B: ["Call up the based god and see if they are still willing to.", true],
+    C: ["Go home and cry. You can't come back from this.", true]
+  },
+  belongings: { 0: "Get Phone", 1: "Open Backpack", 3: "View Journal" }
+};
+
+eventStory(testEvent);
+
+
+/***************************FOR TEXT CURSOR***********/
+//http://jsfiddle.net/Paulpro/adpBM/
+function inputBox() {
+  var min = 5,
+    max = 300,
+    pad_right = 5,
+    input = document.getElementById("user-input");
+
+  input.style.width = min + "px";
+  input.onkeypress = input.onkeydown = input.onkeyup = function() {
+    var input = this;
+    setTimeout(function() {
+      var tmp = document.createElement("div");
+      tmp.style.padding = "0";
+      if (getComputedStyle)
+        tmp.style.cssText = getComputedStyle(input, null).cssText;
+      if (input.currentStyle) tmp.style = input.currentStyle;
+      tmp.style.width = "";
+      tmp.style.position = "absolute";
+      tmp.innerHTML = input.value
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;")
+        .replace(/ /g, "&nbsp;");
+      input.parentNode.appendChild(tmp);
+      var width = tmp.clientWidth + pad_right + 1;
+      tmp.parentNode.removeChild(tmp);
+      if (min <= width && width <= max) input.style.width = width + "px";
+    }, 1);
+  };
+}
