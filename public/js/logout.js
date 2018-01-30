@@ -23,3 +23,10 @@ $('div#bottomDiv').animate({
              }, 300);
         }
 );
+
+$(document).ready(function () {
+    // Handler for .ready() called.
+    window.setTimeout(function () {
+        location.href = "/";
+    }, 900);
+});
