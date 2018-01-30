@@ -31,3 +31,8 @@ div#centerDiv{
     display:none;
     z-index:1;
 }
+
+body {
+  background:black;
+  overflow: hidden;
+}
