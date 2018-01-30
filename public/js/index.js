@@ -176,7 +176,7 @@ function styleElement(el) {
 
 
     function displayOptions(eventNode,timing,txtSpeed){
-      var optTiming = 600;
+      var optTiming = 300;
       var optionLabels = Object.keys(eventNode.options);
       var optionsBox = makeElement("div","optionsBox","game","");
       terminal.appendChild(optionsBox);
@@ -206,17 +206,19 @@ function styleElement(el) {
 
   var testEvent = {
     attriType: "Event",
-    title: "Based God takes no L's.",
+    title: "Welcome to Back to the Routes",
     description:
-    "You were walking home from school when you noticed that the 'Based God' forgot to fuck all your bitches.",
-    question: "What do you do?",
+    "Back to the Routes is a text based game on navigating the hard parts of college. \
+    You will experience many events and have to make many decisions, but you'll have \
+    your belongings and friends to help you out on the way.",
+    question: "Would you like to play?",
     options: {
       A: [
-        "Go back home and rip it. Repent to the gods and hope for the best.",
-        false
+        "Yes! I am ready to get hurt again.",
+        true
       ],
-      B: ["Call up the based god and see if they are still willing to.", true],
-      C: ["Go home and cry. You can't come back from this.", true]
+      B: ["No but I'd like to find out more about the game.", true],
+      C: ["No but I'd like to contribute stories to the game.", true]
     },
     belongings: { 0: "Get Phone", 1: "Open Backpack", 3: "View Journal" }
   };
