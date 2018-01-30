@@ -146,7 +146,7 @@ function styleElement(el) {
     terminal.appendChild(question);
     console.log("question");
 
-    var timing = 1000;
+    var timing = 500;
 
     //If it is an event and not a decision point
     if(descriEvent !==null){
