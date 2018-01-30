@@ -1,6 +1,10 @@
 
 @import url('https://fonts.googleapis.com/css?family=VT323');
 
+html{
+  height:100%;
+}
+
 body{
   background: linear-gradient(black, #862d59);
   position: fixed;
@@ -42,6 +46,8 @@ width:29%;
 height:100%;
 position: fixed;
 left: 70.5%;
+margin-top:1% 
+
 }
 
 ul {
@@ -98,7 +104,7 @@ li a:hover {
 }
 #bbygirl{
   position: fixed;  /*ADD */
-  top: 14.5%;
+  top: 15%;
   left: 70%;
   border:1pt solid pink;
   margin-left:5px;
@@ -135,8 +141,8 @@ li a:hover {
 
 #playerStats {
   position: fixed;
-  top: 15%;
-  left: 77%;
+  top: 17%;
+  left: 81%;
   color:#00ff00;
   text-align: center;
   font-size: 180%;
