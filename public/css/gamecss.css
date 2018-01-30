@@ -11,26 +11,27 @@ width: 100%;
 margin-left:px;
 padding:0px;
 background:#4E4C4D;
+padding-left: 8px
 }
 
 h1 {
 float: left;
-width:70%;
-height:106px;
+width:68%;
+height:90px;
 margin:0px;
 background:#13060d;
 border: 3px solid #00ff00;
 text-align: center;
 font-family: 'VT323', monospace;
-font-size: 65pt;
+font-size: 60pt;
 color: #00ff00;
-padding-top: 4px
-
+padding-top: 4px;
 }
+
 nav {
 float: right;
 width:29%;
-height:113px;
+height:91px;
 }
 
 ul {
@@ -48,7 +49,7 @@ li a {
     font-size: 20pt;
     color: #00ff00;
     text-align: center;
-    padding: 14px 16px;
+    padding: 10px 10px;
     text-decoration: none;
 }
 
@@ -57,10 +58,10 @@ li a:hover {
     border: 1px solid green;
 }
 #terminal{
-  margin-top:20px;
+  margin-top:10px;
   margin-left:10px;
   border:1pt solid pink;
-  height:83vh;
+  height:79vh;
   width:68%;
   display: inline-block;
   vertical-align: bottom;
@@ -68,11 +69,11 @@ li a:hover {
 
 }
 .triplets{
-  margin-top: 20px;
+  margin-top: 10px;
   margin-right:5px;
   display: inline-block;
   float:right;
-  width: 28%;
+  width: 29%;
   position: absolute;
   right:5px;
 
@@ -83,7 +84,7 @@ li a:hover {
   margin-left:5px;
   margin-right:5px;
   margin-bottom:5px;
-  height:31vh;
+  height:30vh;
   width:95%;
   background-color: black;
 
@@ -92,14 +93,14 @@ li a:hover {
   border:1pt solid pink;
   margin:5px;
   width:95%;
-  height:40vh;
+  height:38vh;
   background-color: black;
 }
 #infant{
   border:1pt solid pink;
   margin:5px;
   width:95%;
-  height:10vh;
+  height:8vh;
   background-color: black;
 
 }
