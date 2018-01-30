@@ -61,7 +61,7 @@ li a:hover {
   /* position: fixed;  /*ADD */
   margin-top:10px;
   margin-left:10px;
-  border:1pt solid pink;
+  border:3pt solid pink;
   height:83vh;
   width:68%;
   display: inline-block;
@@ -96,7 +96,7 @@ li a:hover {
   margin-bottom:11px;
   width:95%;
   height:40vh;
-  background-color: black;
+  background-color:#260d1a;
 }
 #infant{
   border:1pt solid pink;
