@@ -1,8 +1,4 @@
-
-// FROM CATBOOK WORKSHOP ADVANCED
-// https://github.com/mit6148/catbook-advanced
-
-onst passport = require('passport');
+const passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 const User = require('./models/user');
