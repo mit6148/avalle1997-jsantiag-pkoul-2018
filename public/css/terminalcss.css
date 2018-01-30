@@ -1,7 +1,16 @@
 body{
   background-color: black;
+  /* background : linear-gradient(black, #862d59); */
   font-family: 'VT323', monospace;
 }
+
+/* body{
+  background: linear-gradient(black, #862d59);
+  position: fixed;
+  /* height:100%; */
+  /* background-repeat:no-repeat; */
+}
+
 #user-input {
     border: none;
     color: transparent;

@@ -3,7 +3,8 @@
 
 body{
   background: linear-gradient(black, #862d59);
-  /* height:100%; */
+  position: fixed;
+  height:100%;
   /* background-repeat:no-repeat; */
 }
 
