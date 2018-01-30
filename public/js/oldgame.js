@@ -1,7 +1,3 @@
-
-
-
-
 //Helper function **********************************************************
 /* */
 //---------------------------------------------------------------------
@@ -11,6 +7,54 @@ function isNumber(value) {
 
 function isBoolean(value) {
   return typeof value === "boolean";
+}
+
+//Refocus on input when terminal is clicked since user won't be able to see it.
+//Expand to work on other containers as well.
+function terminalFocus() {
+  //Should not occur but if does, choose the very first input element
+  var inputEl = terminal.getElementsByTagName("input")[0];
+  console.log("found input tag");
+  inputEl.focus();
+}
+
+/***************************FOR TEXT CURSOR***********/
+//http://jsfiddle.net/Paulpro/adpBM/
+function inputBox() {
+  var min = 10,
+    max = 300,
+    pad_right = 5,
+    input = document.getElementById("user-input");
+
+  input.style.width = min + "px";
+
+  input.onkeydown = input.onkeyup = function() {
+    var input = this;
+    setTimeout(function() {
+
+      var tmp = document.createElement("div");
+      tmp.style.padding = "0";
+      if (getComputedStyle)
+        tmp.style.cssText = getComputedStyle(input, null).cssText;
+      if (input.currentStyle) tmp.style = input.currentStyle;
+      tmp.style.width = "";
+      tmp.style.position = "absolute";
+      tmp.innerHTML = input.value
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;")
+        .replace(/ /g, "&nbsp;");
+      if(tmp.innerText.length>1){
+        tmp.innerText = "";
+      }
+      input.parentNode.appendChild(tmp);
+      var width = tmp.clientWidth + pad_right + 1;
+      tmp.parentNode.removeChild(tmp);
+      if (min <= width && width <= max) input.style.width = width + "px";
+    }, 1);
+  };
 }
 
 // STATS*******************************************************
@@ -268,6 +312,7 @@ var hpParse = [
   ["Exhausted", 0.1],
   ["Burned Out", 0.05]
 ];
+
 var hpStat = statTemplate(
   1,
   "HP",
@@ -507,79 +552,8 @@ function journal(transitionText, currentEvent, eventCarryLimit) {
 }
 
 /*****************************PAGE STYLING AND ELEMENT CREATING***/
-
-//Prompts the user for a valid response. Returns the selection.
-function getResponse(event) {
-  //User tries to quit --> ctrl+q
-  if (event.ctrlKey & (event.keyCode === 17)) {
-    //turn off writability while you process their input.
-    event.target.setAttribute("contenteditable", false);
-    //Hide element from user.
-    event.target.style.display = "none";
-    console.log("quit game. ");
-  }
-  //User tries to get instructions --> shift+?
-  if (event.shiftKey & (event.keyCode === 63)) {
-    //turn off writability while you process their input.
-    event.target.setAttribute("contenteditable", false);
-    console.log("Get game instructions.");
-  }
-
-  //User enters their response --> ENTER
-  if (event.keyCode === 13) {
-    console.log("User hits ENTER.");
-    //turn off writability while you process their input.
-    event.target.setAttribute("contenteditable", false);
-
-    //Check if the user entered more than one key. ADD OR INVALID ENTRY FOR THISDECISION
-    if (event.target.innerText.length > 1) {
-      console.log("Invalid entry. Must be one char long");
-      //Clear their content
-      event.target.innerText = "";
-
-      //Get this input to be the next thing focused on by the window.
-      event.target.focus();
-
-      //Let the user edit the input box again. **NOT WORKING**
-      event.target.setAttribute("contenteditable", true);
-    } else {
-      //Get the key they entered and the element they entered in.
-      var selection = event.keyCode;
-      var el = event.target;
-      //Disconnect the writability
-      el.setAttribute("disabled", true);
-      if ((event.keyCode >= 97) & (event.keyCode >= 122)) {
-        console.log("Selected: Story option [A-Z]");
-        console.log("Go to selection.");
-        el.parentNode.removeChild(el);
-      }
-      if ((event.keyCode >= 48) & (event.keyCode <= 57)) {
-        console.log("Selected: Beloning option [0-9]");
-        console.log("View belongings");
-      }
-    }
-  }
-}
-
-//Add an input line for the user to respond in and call the getResponse onkeypress.
-function addInput(beforeNode) {
-  var userIn = makeElement(
-    "div",
-    "user-input",
-    "game",
-    ""
-  );
-
-  insert(userIn, beforeNode, false);
-  inputBox();
-  userIn.focus();
-  var cursor = document.getElementById("input-cursor");
-  document.getElementById("terminal").append(cursor);
-  cursor.style.display = "inline-block";
-}
-
 /* Make an element object*/
-function makeElement(type, id, className,content) {
+function makeElement(type, id, className, content) {
   if (type === null) {
     console.log("Element has no type and no reference. Couldn't be created");
   } else {
@@ -606,13 +580,17 @@ function styleElement(el) {
     el.style.display = "block";
     el.style.textAlign = "center";
     el.style.justifyContent = "center";
-    el.style.fontSize = "44px";
+    el.style.marginTop = "15%";
+    el.style.fontSize = "90px";
+    el.style.lineHeight = "1";
+    el.style.textTransform = "capitalize";
     console.log("Element styled is in terminal of type: start");
   }
 
   //Style the Game text
   if (el.className === "game") {
     console.log("is in fact in game");
+
     if (el.id === "title") {
       el.style.display = "block";
       el.style.textAlign = "center";
@@ -621,28 +599,18 @@ function styleElement(el) {
       el.style.textTransform = "capitalize";
       console.log("Element styled is in terminal-->game-->" + el.id);
     }
-
-    // ADDED LEFT AND RIGHT PADDING TO THE DESCRIPTION
-
     if (el.id === "description") {
       el.style.display = "block";
-      el.style.padding =  "0px 30px 0px 30px";
       el.style.textAlign = "none";
       el.style.lineHeight = ".9";
       el.style.justifyContent = "initial";
       el.style.fontSize = "26px";
       console.log("Element styled is in terminal-->game-->" + el.id);
     }
-
-    // ADDED LEFT AND RIGHT PADDING TO THE QUESTIOn
-
     if (el.id === "question") {
       console.log("Is in fact a question.");
       el.style.display = "block";
-      el.style.padding =  "0px 30px 0px 30px";
       el.style.lineHeight = "1.5";
-      // el.style.textAlign = "none";
-      //el.style.justifyContent = "initial";
       el.style.fontSize = "26px";
       console.log("Element styled is in terminal-->game-->" + el.id);
     }
@@ -656,18 +624,36 @@ function styleElement(el) {
       el.style.textAlign = "left";
       console.log("Element styled is in terminal-->game-->" + el.id);
     }
-    if (el.id === "belongings") {
-      el.style.display = "block";
-      el.style.textAlign = "none";
-      el.style.justifyContent = "initial";
-      el.style.fontSize = "26px";
+
+    if (el.id === "belongingsBox") {
+      //ADD
+      el.style.display = "flex";
+      el.style.paddingRight = "30px";
+      el.style.paddingLeft = "30px";
+      el.style.marginRight = "30px";
+      el.style.marginLeft = "30px";
+      el.style.width = "80%";
+      el.style.verticalAlign = "middle";
+      el.style.justifyContent = "space-between";
+      el.style.borderStyle = "dashed ";
+      el.style.position = "fixed";
+      el.style.top = "85%";
       console.log("Element styled is in terminal-->game-->" + el.id);
     }
+
     if (el.id === "terminal-ctrls") {
-      el.style.display = "block";
-      el.style.textAlign = "none";
-      el.style.justifyContent = "initial";
-      el.style.fontSize = "24px";
+      /*ADD */
+      el.innerHTML = "CTRL+Q   |  CTRL+?";
+      el.style.background = "#757575";
+      el.style.height = "30px";
+      el.style.color = "white";
+      el.style.paddingLeft = "7px";
+      el.style.paddingRight = "7px";
+      el.style.background = "transparent";
+      el.style.borderStyle = "dashed double dashed double";
+      el.style.position = "fixed";
+      el.style.left = "80%";
+      el.style.bottom = "92%";
       console.log("Element styled is in terminal-->game-->" + el.id);
     }
 
@@ -679,19 +665,19 @@ function styleElement(el) {
       el.style.fontSize = "44px";
       console.log("Element styled is in terminal of type: end");
     }
-
-    //Style the user input element.
-    if (el.id === "user-input") {
-      el.style.fontSize = "18px";
-      el.style.background = "transparent";
-      el.style.color = "transparent";
-      el.style.border = "none";
-      el.style.width = "10px";
-      el.setAttribute("onkeypress", "getResponse(event)");
-      console.log("Element styled is in terminal of type: input");
-    }
   }
-
+  //Style the user input element.
+  if (el.id === "user-input") {
+    el.style.fontSize = "16px";
+    el.style.background = "transparent";
+    el.style.color = "transparent";
+    el.style.border = "none";
+    el.style.letterSpacing = "2px";
+    el.setAttribute("maxLength",1);
+    el.setAttribute("onkeypress", "getResponse(event)");
+    console.log(el);
+    console.log("Element styled is in terminal of type: input");
+  }
   if (el.className === "statPanel") {
     console.log("Styling an element of the statPanel");
   }
@@ -739,14 +725,39 @@ function insert(newElement, targetElement, before) {
   }
 }
 
+//Add an input line for the user to respond in and call the getResponse onkeypress.
+function addInput(beforeNode, before) {
+  var userIn = makeElement("INPUT", "user-input", "game", "");
+  userIn.style.display = "inline-block";
+  var lineHead = makeElement(
+    "div",
+    "terminal-head",
+    "game",
+    "SW-ELL-ESL-EY:~ avalle$"
+  );
+  lineHead.style.display = "inline-block";
+  lineHead.style.fontSize = "18px";
+  lineHead.style.paddingBottom = "4px";
+  userIn.style.paddingBottom = "4px";
+  terminal.append(lineHead);
+  terminal.append(userIn);
+  inputBox();
+  userIn.focus();
+  console.log(beforeNode);
+  var cursor = makeElement("label", "input-cursor", "game", "");
+  terminal.append(cursor);
+  cursor.style.display = "inline";
+}
+
 var liCount = 1;
 var liMAX = 20;
 var terminal = document.getElementById("terminal");
 var userresponse = "";
 
 //Show text in a type writer fashion on the terminal **FIX**
-function terminaloutput(narrator, txt, rapid, wordlimit) {
+function terminaloutput(narrator, txt, rapid) {
   console.log("print to terminal");
+
   var i = 0;
   var words = 0;
   var speed = 80;
@@ -773,28 +784,6 @@ function terminaloutput(narrator, txt, rapid, wordlimit) {
         console.log("word length: " + words);
         charNow += "</br>";
       }
-      if (charNow === " ") {
-        // if (words == wordlimit) {
-        //   console.log("Break for word length");
-        //   console.log("word length: " + words);
-        //   narrator.innerHTML += "</br>";
-        //   words = 0;
-        // } else {
-        //   words += 1;
-        // }
-        console.log(words);
-        //         if ( //(txt.charAt(i - 1) === "!") | add?
-        //           (txt.charAt(i - 1) === ".") |
-
-        //           (txt.charAt(i - 1) === "”")
-        //         ) {
-        //           console.log("Break for '.' or '!' or 'quotes' ");
-        //           console.log("word length: " + words);
-        //           narrator.innerHTML += "</br>";
-        //           words = 0;
-        //         }
-      }
-
       narrator.innerHTML += charNow;
       i++;
       setTimeout(typeWriter, speed);
@@ -805,78 +794,148 @@ function terminaloutput(narrator, txt, rapid, wordlimit) {
 
 //Show an entire event on the terminal.
 function eventStory(eventNode) {
-  var descriEvent=null;
+  var ctrls = makeElement(
+    "div",
+    "terminal-ctrls",
+    "game",
+    "CTRL+Q   |  CTRL+?"
+  ); /*ADD */
+  console.log(ctrls);
+  terminal.appendChild(ctrls);
+
+  var descriEvent = null;
   if (eventNode.attriType === "Event") {
-    var titleEvent = makeElement("div", "title", "game","'" + eventNode.title + "'</br>");
+    var titleEvent = makeElement(
+      "div",
+      "title",
+      "game",
+      "'" + eventNode.title + "'</br>"
+    );
     terminal.appendChild(titleEvent);
     console.log("title");
 
-    descriEvent = makeElement("div", "description", "game","");
+    descriEvent = makeElement("div", "description", "game", "");
     terminal.appendChild(descriEvent);
     console.log("description");
   }
 
-  var question = makeElement("div", "question", "game","");
+  var question = makeElement("div", "question", "game", "");
   terminal.appendChild(question);
   console.log("quesion");
 
   var timing = 1000;
 
   //If it is an event and not a decision point
-  if(descriEvent !==null){
-  setTimeout(
-    terminaloutput,
-    timing,
-    descriEvent,
-    eventNode.description,
-    30,
-    10
-  );
+  if (descriEvent !== null) {
+    setTimeout(
+      terminaloutput,
+      timing,
+      descriEvent,
+      eventNode.description,
+      30,
+      10
+    );
     timing += eventNode.description.length * 50;
   }
 
-  setTimeout(
-    terminaloutput,
-    timing,
-    question,
-    eventNode.question,
-    30,
-    10
-  );
-
-
-  timing += eventNode.question.length *50;
-  setTimeout(setTimeout,timing,displayOptions,500,eventNode,5000,50);
+  setTimeout(terminaloutput, timing, question, eventNode.question, 30, 10);
+  timing += eventNode.question.length * 70;
+  setTimeout(displayList, timing, testEvent, "options", "p", 6000, 30);
+  displayList(player, "belongings", "div", null, null);
 }
 
+function displayList(obj, list, type, timing, txtSpeed) {
+  var optTiming = 600; //if want to have one line appear at a time.
+  var listObj = obj[list];
+  console.log(listObj);
+  var labels = Object.keys(listObj);
+  var container = makeElement("div", list + "Box", "game", "");
 
-function displayOptions(eventNode,timing,txtSpeed){
-  var optTiming = 600;
-  var optionLabels = Object.keys(eventNode.options);
-  var optionsBox = makeElement("div","optionsBox","game","");
-  terminal.appendChild(optionsBox);
-
-  console.log(optionLabels);
-  for (i = 0; i < optionLabels.length; i++) {
-    var option = makeElement(
-      "p",
-      "options",
-      "game",
-      "["+optionLabels[i]+"] "
-    );
-    var status = eventNode.options[optionLabels[i]][1];
-    if(status ==false | status==null){
-      option.style.color = "red";
+  console.log(labels);
+  for (i = 0; i < labels.length; i++) {
+    var el = makeElement(type, list, "game", "[" + labels[i] + "] ");
+    var status = listObj[labels[i]][1];
+    console.log(status);
+    if (status === false) {
+      el.style.color = "red";
     }
-    optionsBox.appendChild(option);
-
-    var text = eventNode.options[optionLabels[i]][0];
-
-     setTimeout(terminaloutput, optTiming, option, text, txtSpeed, 15);
-    optTiming += timing;
+    if (status === null) {
+      el.style.color = "#424242";
+    }
+    container.appendChild(el);
+    console.log(listObj[labels[i]]);
+    if (timing !== null) {
+      var text = listObj[labels[i]][0];
+      setTimeout(terminaloutput, optTiming, el, text, txtSpeed);
+      optTiming += timing;
+    } else {
+      el.innerHTML += listObj[labels[i]][0];
+    }
   }
-  setTimeout(addInput, optTiming, optionsBox);
+  if (list === "options") {
+    setTimeout(addInput, optTiming, document.getElementById(list + "Box"));
+  }
+  terminal.appendChild(container);
 }
+
+function clearCanvas(parentNode) {
+  while (parentNode.firstChild) {
+    parentNode.removeChild(parentNode.firstChild);
+  }
+}
+
+function displayunicode(e){
+var unicode=e.keyCode? e.keyCode : e.charCode
+return unicode;
+}
+//Prompts the user for a valid response. Returns the selection.
+//User can enter at most one char.
+function getResponse(event) {
+  console.log(event.keyCode);
+  try{
+    var input = event.target.value.charCodeAt(0);
+  if((event.target.value==="") & event.keyCode==13){
+    console.log("Invalid entry.");
+  }
+
+  //Hits the space bar and is avaiable.
+  if(validCodes[32][1]===true & event.keyCode===32 ){
+         console.log("START GAME.");
+         clearCanvas(terminal);
+         eventStory(testEvent); //First node
+      }
+
+  //User quits game and opt avaiable.
+  if (validCodes[17]!==null & validCodes[17]!==undefined & event.ctrlKey & event.keyCode===17 & validCodes[17][1]) {
+    console.log("QUIT GAME.");
+    end();
+  }
+
+  //User gets game instructions and is avaiable.
+  if ( validCodes[63]!==null & validCodes[63]!==undefined & event.shiftKey & event.keyCode===63& validCodes[63][1]){
+      console.log("INSTRUCTIONS.");
+      help();
+     }
+
+  //Selects something that requres ENTER and is avaiable.
+  if(event.keyCode===13){
+    console.log("testing controls of user");
+    console.log(event.target.value);
+    if(validCodes[input][0]=="option"){
+      console.log("Selected an option.");
+    }
+    if(validCodes[input][0]=="belonging"){
+      console.log("Selected a belonging");
+    }
+  }
+    return 1;
+  }
+  catch(err){
+    console.log("invalid entry");
+    return 0;
+  }
+
+  }
 
 
 
@@ -893,43 +952,155 @@ var testEvent = {
     ],
     B: ["Call up the based god and see if they are still willing to.", true],
     C: ["Go home and cry. You can't come back from this.", true]
-  },
-  belongings: { 0: "Get Phone", 1: "Open Backpack", 3: "View Journal" }
+  }
 };
 
-eventStory(testEvent);
+//Belongings
+var player = {
+  name: "Player",
+  age: 52,
+  belongings: {
+    0: ["Backpack", null],
+    1: ["Journal", true],
+    2: ["Phone", false],
+    3: ["Backpack", null],
+    4: ["Journal", true],
+    5: ["Phone", false]
+  }
+};
 
+//Default: testingEvent and start page
+var parentPointer = null;
+var childPointer = null;
+var validCodes = {
+};
 
-/***************************FOR TEXT CURSOR***********/
-//http://jsfiddle.net/Paulpro/adpBM/
-function inputBox() {
-  var min = 5,
-    max = 300,
-    pad_right = 5,
-    input = document.getElementById("user-input");
+validCodes[17] = ["terminal", true];
+validCodes["A".charCodeAt(0)] = ["option", true];
+validCodes["0".charCodeAt(0)] = ["belonging", true];
+validCodes["?".charCodeAt(0)] = ["terminal", true];
+validCodes[32] = ["spacebar", true];
 
-  input.style.width = min + "px";
-  input.onkeypress = input.onkeydown = input.onkeyup = function() {
-    var input = this;
-    setTimeout(function() {
-      var tmp = document.createElement("div");
-      tmp.style.padding = "0";
-      if (getComputedStyle)
-        tmp.style.cssText = getComputedStyle(input, null).cssText;
-      if (input.currentStyle) tmp.style = input.currentStyle;
-      tmp.style.width = "";
-      tmp.style.position = "absolute";
-      tmp.innerHTML = input.value
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;")
-        .replace(/ /g, "&nbsp;");
-      input.parentNode.appendChild(tmp);
-      var width = tmp.clientWidth + pad_right + 1;
-      tmp.parentNode.removeChild(tmp);
-      if (min <= width && width <= max) input.style.width = width + "px";
-    }, 1);
-  };
+function game() {
+
+  start();
+  terminal.setAttribute("onclick",terminalFocus);
+  console.log(start);
 }
+
+function start(){
+  var home = makeElement("div", "title", "start", "WANDA'S WORLD");
+  terminal.append(home);
+  //SPACE keycode= 32.
+  var instrI = makeElement("div", "title", "game", "Hit the ");
+  instrI.style.fontSize = "26px";
+  instrI.style.marginLeft = "28%";
+  instrI.style.display = "inline";
+  terminal.append(instrI);
+
+  var key = makeElement("div", "title", "start-key", "SPACE BAR");
+  key.style.fontSize = "32px";
+  key.style.display = "inline";
+  key.style.textDecoration = "underline";
+  terminal.append(key);
+
+  var instrE = makeElement("div", "title", "game", " to Enter");
+  instrE.style.fontSize = "26px";
+  instrE.style.display = "inline";
+  terminal.append(instrE);
+
+  var start = makeElement("INPUT", "user-input", "startIn", "");
+  start.style.display = "block";
+
+  start.addEventListener('onkeypress', getResponse);
+  terminal.addEventListener('click',terminalFocus);
+  start.focus();
+  terminal.append(start);
+}
+
+function end(){
+  clearCanvas(terminal);
+  //terminal.onclick = false;
+  terminal.removeEventListener('onclick',terminalFocus);
+  var home = makeElement("div", "title", "start", "THE END");
+  home.style.marginBottom = "none";
+  terminal.append(home);
+
+
+  //SPACE keycode= 32.
+  var instrI = makeElement("a", "title", "dog", "Forum ");
+  instrI.style.fontSize = "26px";
+  instrI.style.marginLeft = "36%";
+  instrI.style.display = "inline";
+  instrI.style.marginRight = "5%";
+  instrI.style.textDecoration = "underline";
+  instrI.href = "https://78.media.tumblr.com/7db4fea6413654d8e7ce6db6dbf59cd0/tumblr_n7edj9VHt51sfzzico1_500.gif"
+  terminal.append(instrI);
+
+
+  var instrE = makeElement("a", "title", "game", " Play Game");
+  console.log(instrE);
+
+  instrE.style.fontSize = "26px";
+  instrE.style.display = "inline";
+  instrE.style.padding = "10px";
+  instrE.style.textDecoration = "underline";
+  instrE.setAttribute('onclick',start);
+  console.log(instrE);
+  terminal.append(instrE);
+
+}
+
+//end();
+
+function help(){
+   //terminal.onclick = false;
+  clearCanvas(terminal);
+  terminal.removeEventListener('onclick',terminalFocus);
+  var home = makeElement("div", "title", "game", "How to Play");
+  home.style.textDecoration = "underline";
+  home.style.marginBottom = "none";
+  terminal.append(home);
+
+  //SPACE keycode= 32.
+  var instrI = makeElement("a", "title", "dog", "Important stuff here about playing blah blah blah here here here it goes yeah ");
+  instrI.style.fontSize = "26px";
+  instrI.style.marginLeft = "10%";
+  instrI.style.display = "inline";
+  instrI.style.marginRight = "5%";
+
+  terminal.append(instrI);
+
+
+
+}
+game();
+//help();
+
+//eventStory(testEvent,player);
+//displayList(testEvent,"options",5000,null);
+
+// function Timer(callback, delay) {
+//     var timerId, start, remaining = delay;
+
+//     this.pause = function() {
+//         window.clearTimeout(timerId);
+//         remaining -= new Date() - start;
+//     };
+
+//     this.resume = function() {
+//         start = new Date();
+//         window.clearTimeout(timerId);
+//         timerId = window.setTimeout(callback, remaining);
+//     };
+
+//     this.resume();
+// }
+
+// var timer = new Timer(function() {
+//     alert("Done!");
+// }, 1000);
+
+// timer.pause();
+
+// timer.resume();
