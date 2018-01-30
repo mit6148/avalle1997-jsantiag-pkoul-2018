@@ -98,13 +98,13 @@ li a:hover {
 }
 #bbygirl{
   position: fixed;  /*ADD */
-  top: 14.5%;
+  top: 15%;
   left: 70%;
   border:1pt solid pink;
   margin-left:5px;
   /* margin-right:5px; */
   /* margin-bottom:11px; */
-  height:32%;
+  height:31%;
   width:28.5%;
   background-color:#260d1a;
 
@@ -314,4 +314,39 @@ ol {
   100% {
     opacity: 1;
   }
+
+
+  /*Keep blinking animation that wills till be used.*/
+  /* .start-key {
+    animation: blink 2s linear infinite;
+    transition: 1s ease-in-out;
+  }
+
+  @keyframes blink {
+    0% { opacity: 0; }
+    50% { opacity: .7; }
+    0% { opacity: 0; }
+    75% { opacity: .4; }
+    0% { opacity: 0; }
+    25% { opacity: .5; }
+    50% { opacity: .7; }
+  }
+   */
+
+.start {
+/*   animation: blink 2s linear infinite; */
+  transform: translate(3em,0);
+  animation: shake 1.5s ease-in-out infinite;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+
+@keyframes shake {
+  0% { margin-right: 5px; }
+  25% {margin-left: 5px}
+  50%{ opacity: .5; }
+  75% {margin-left: 5px}
+
 }
