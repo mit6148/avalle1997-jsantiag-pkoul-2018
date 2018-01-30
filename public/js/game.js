@@ -593,36 +593,38 @@ function styleElement(el) {
 
     if (el.id === "title") {
       el.style.display = "block";
+      el.style.padding =  "1% 0% 0% 0%";
       el.style.textAlign = "center";
-      el.style.fontSize = "36px";
+      el.style.fontSize = "375%";
       el.style.lineHeight = "1";
       el.style.textTransform = "capitalize";
       console.log("Element styled is in terminal-->game-->" + el.id);
     }
     if (el.id === "description") {
       el.style.display = "block";
-      el.style.padding =  "0px 30px 0px 30px";
+      el.style.padding =  "0% 6% 0% 6%";
       el.style.textAlign = "none";
       el.style.lineHeight = ".9";
       el.style.justifyContent = "initial";
-      el.style.fontSize = "26px";
+      el.style.fontSize = "200%";
       console.log("Element styled is in terminal-->game-->" + el.id);
     }
     if (el.id === "question") {
       console.log("Is in fact a question.");
       el.style.display = "block";
-      el.style.padding =  "0px 30px 0px 30px";
-      el.style.lineHeight = "1.5";
-      el.style.fontSize = "26px";
+      el.style.padding =  "0% 6% 0% 6%";
+      el.style.lineHeight = "1";
+      el.style.fontSize = "200%";
       console.log("Element styled is in terminal-->game-->" + el.id);
     }
     if (el.id === "optionsBox") {
+      el.style.padding =  "0% 6% 0% 6%";
       el.style.lineHeight = "1";
-      el.style.marginTop = "0px";
-      el.style.fontSize = "18px";
-      el.style.lineSpacing = "1em";
-      el.style.marginRight = "10%";
-      el.style.marginLeft = "10%";
+      el.style.marginTop = "0%";
+      el.style.fontSize = "150%";
+      // el.style.lineSpacing = "0.5em";
+      el.style.marginRight = "5%";
+      el.style.marginLeft = "5%";
       el.style.textAlign = "left";
       console.log("Element styled is in terminal-->game-->" + el.id);
     }
@@ -654,7 +656,7 @@ function styleElement(el) {
       el.style.background = "transparent";
       el.style.borderStyle = "dashed double dashed double";
       el.style.position = "fixed";
-      el.style.left = "80%";
+      el.style.left = "85%";
       el.style.bottom = "92%";
       console.log("Element styled is in terminal-->game-->" + el.id);
     }
@@ -735,7 +737,7 @@ function addInput(beforeNode, before) {
     "div",
     "terminal-head",
     "game",
-    "SW-ELL-ESL-EY:~ avalle$"
+    "SWELL-ESL-EY:~ avalle$"
   );
   lineHead.style.display = "inline-block";
   lineHead.style.fontSize = "18px";
@@ -868,7 +870,7 @@ function displayList(obj, list, type, timing, txtSpeed) {
     console.log(listObj[labels[i]]);
     if (timing !== null) {
       var text = listObj[labels[i]][0];
-      setTimeout(terminaloutput, optTiming, el, text, txtSpeed);
+      setTimeout(terminaloutput, optTiming, el, text, null);
       optTiming += timing;
     } else {
       el.innerHTML += listObj[labels[i]][0];
